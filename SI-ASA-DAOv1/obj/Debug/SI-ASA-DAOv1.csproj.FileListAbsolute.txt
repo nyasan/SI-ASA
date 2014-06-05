@@ -1,0 +1,31 @@
+C:\Users\TVD\Desktop\SI-ASA-DAOv1\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\TVD\Desktop\SI-ASA-DAOv1\bin\Debug\SI-ASA-DAOv1.dll
+C:\Users\TVD\Desktop\SI-ASA-DAOv1\bin\Debug\SI-ASA-DAOv1.pdb
+C:\Users\TVD\Desktop\SI-ASA-DAOv1\bin\Debug\SI-ASA-ENTIDADESv1.dll
+C:\Users\TVD\Desktop\SI-ASA-DAOv1\bin\Debug\SI-ASA-ENTIDADESv1.pdb
+C:\Users\TVD\Desktop\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.dll
+C:\Users\TVD\Desktop\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.pdb
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\Transf\ultima versionNICO 3-06 11am\ultima version\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.csprojResolveAssemblyReference.cache
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\Transf\ultima versionNICO 3-06 11am\ultima version\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.dll
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\Transf\ultima versionNICO 3-06 11am\ultima version\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.pdb
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\SI-ASAv6\SI-ASA-DAOv1\bin\Debug\SI-ASA-DAOv1.dll
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\SI-ASAv6\SI-ASA-DAOv1\bin\Debug\SI-ASA-DAOv1.pdb
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\SI-ASAv6\SI-ASA-DAOv1\bin\Debug\SI-ASA-ENTIDADESv1.dll
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\SI-ASAv6\SI-ASA-DAOv1\bin\Debug\SI-ASA-ENTIDADESv1.pdb
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\SI-ASAv6\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.csprojResolveAssemblyReference.cache
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\SI-ASAv6\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.dll
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\SI-ASAv6\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.pdb
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\SI-ASAv6.1\SI-ASA-DAOv1\bin\Debug\SI-ASA-DAOv1.dll
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\SI-ASAv6.1\SI-ASA-DAOv1\bin\Debug\SI-ASA-DAOv1.pdb
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\SI-ASAv6.1\SI-ASA-DAOv1\bin\Debug\SI-ASA-ENTIDADESv1.dll
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\SI-ASAv6.1\SI-ASA-DAOv1\bin\Debug\SI-ASA-ENTIDADESv1.pdb
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\SI-ASAv6.1\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.csprojResolveAssemblyReference.cache
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\SI-ASAv6.1\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.dll
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\SI-ASAv6.1\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.pdb
+C:\Users\CESAR\Documents\Visual Studio 2010\WebSites\SI-ASAv6.3\SI-ASA-DAOv1\bin\Debug\SI-ASA-DAOv1.dll
+C:\Users\CESAR\Documents\Visual Studio 2010\WebSites\SI-ASAv6.3\SI-ASA-DAOv1\bin\Debug\SI-ASA-DAOv1.pdb
+C:\Users\CESAR\Documents\Visual Studio 2010\WebSites\SI-ASAv6.3\SI-ASA-DAOv1\bin\Debug\SI-ASA-ENTIDADESv1.dll
+C:\Users\CESAR\Documents\Visual Studio 2010\WebSites\SI-ASAv6.3\SI-ASA-DAOv1\bin\Debug\SI-ASA-ENTIDADESv1.pdb
+C:\Users\CESAR\Documents\Visual Studio 2010\WebSites\SI-ASAv6.3\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.csprojResolveAssemblyReference.cache
+C:\Users\CESAR\Documents\Visual Studio 2010\WebSites\SI-ASAv6.3\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.dll
+C:\Users\CESAR\Documents\Visual Studio 2010\WebSites\SI-ASAv6.3\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.pdb
