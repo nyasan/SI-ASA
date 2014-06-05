@@ -1,0 +1,25 @@
+﻿body {
+}
+
+label
+{
+    float:left;
+    width:27%;
+    text-align:right;
+}
+
+.Datos
+{
+    width:45%
+}
+
+
+#informacion_extra label
+{
+    float:none;
+}
+
+#descripcion_curso
+{
+    vertical-align:top;
+}
