@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AlumnoDao.cs" />
     <Compile Include="AlumnosQueryDao.cs" />
+    <Compile Include="AlumnosxCursoDao.cs" />
     <Compile Include="CursoDao.cs" />
     <Compile Include="CursosQueryDao.cs" />
     <Compile Include="DocenteDao.cs" />
