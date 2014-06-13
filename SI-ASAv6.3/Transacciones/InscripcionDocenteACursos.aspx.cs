@@ -11,4 +11,8 @@ public partial class Transacciones_InscripcionDocenteACursos : System.Web.UI.Pag
     {
 
     }
+    protected void btnRegistrar_Click(object sender, EventArgs e)
+    {
+
+    }
 }
