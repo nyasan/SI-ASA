@@ -28,7 +28,7 @@ public partial class Transacciones_AsistenciaAlumnosACurso : System.Web.UI.Page
 
     protected void cargarCombos(DropDownList ddl)
     {
-        ddl.DataSource = CursoDao.cargarCombo();
+        ddl.DataSource = CursoDao.ObtenerTodo();
         ddl.DataValueField = "id_curso";
         ddl.DataTextField = "nombre";
         ddl.DataBind();
@@ -37,7 +37,7 @@ public partial class Transacciones_AsistenciaAlumnosACurso : System.Web.UI.Page
     protected void btn_registrar_Click(object sender, EventArgs e)
     {
         if (alumnos.Count != 0)
-            AlumnoDao.registrarAsistencia(alumnos, ddl_Curso.SelectedIndex, DateTime.Now);
+            falta_alumno_x_cursoDao.registrarAsistencia(alumnos, ddl_Curso.SelectedIndex, DateTime.Now);
     }
     protected void gv_grillaAlumnos_SelectedIndexChanged(object sender, EventArgs e)
     {

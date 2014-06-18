@@ -27,7 +27,7 @@ public partial class Transacciones_InscripcionAlumnoACursos : System.Web.UI.Page
     }
     protected void cargarLista(ListBox lista)
     {
-        lista.DataSource = CursoDao.cargarCombo();
+        lista.DataSource = CursoDao.ObtenerTodo();
         lista.DataValueField = "id_curso";
         lista.DataTextField = "nombre";
         lista.DataBind();

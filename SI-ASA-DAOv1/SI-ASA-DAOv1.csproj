@@ -47,6 +47,7 @@
     <Compile Include="CursosQueryDao.cs" />
     <Compile Include="DocenteDao.cs" />
     <Compile Include="DocenteQueryDao.cs" />
+    <Compile Include="falta_alumno_x_cursoDao.cs" />
     <Compile Include="HorarioDao.cs" />
     <Compile Include="NivelEstudioDao.cs" />
     <Compile Include="PersonaDao.cs" />

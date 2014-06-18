@@ -21,9 +21,7 @@
         <asp:TextBox ID="txt_legajo" runat="server"></asp:TextBox><br /><br />
         <asp:Button ID="btn_Buscar" runat="server" Text="Buscar" />
         <br /><br />
-        <asp:GridView ID="gv_busqueda" runat="server" AutoGenerateColumns="False" 
-            AutoGenerateSelectButton="True" 
-            onselectedindexchanged="gv_busqueda_SelectedIndexChanged">
+        <asp:GridView ID="gv_busqueda" runat="server" AutoGenerateColumns="False">
         
         <Columns>
             <asp:BoundField HeaderText="Legajo" DataField="legajo" />
