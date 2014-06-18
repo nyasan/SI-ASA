@@ -45,6 +45,7 @@
     <Compile Include="Curso.cs" />
     <Compile Include="CursoQuery.cs" />
     <Compile Include="Docente.cs" />
+    <Compile Include="DocenteQuery.cs" />
     <Compile Include="Horario.cs" />
     <Compile Include="NivelEstudio.cs" />
     <Compile Include="Persona.cs" />
