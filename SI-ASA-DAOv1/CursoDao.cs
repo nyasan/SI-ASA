@@ -219,5 +219,39 @@ namespace SI_ASA_DAOv1
                 cn.Close();
             }
         }
+
+        public static Curso getCurso(string nombre)
+        {
+            Curso curso = new Curso();
+            string sql = "select * from cursos join horarios on (cursos.id_horario=horarios.id_horario) where cursos.nombre like @nombre";
+            SqlConnection cn = new SqlConnection();
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            try
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand(sql, cn);
+                cmd.Parameters.AddWithValue("@nombre", "%" + nombre + "%");
+                SqlDataReader dr = cmd.ExecuteReader();
+                
+                curso.nombre = dr["nombre"].ToString();
+                curso.descripcion = dr["descripcion"].ToString();
+                curso.hora_desde = dr["horario_inicio"].ToString();
+                curso.hora_hasta = dr["horario_fin"].ToString();
+
+                dr.Close();
+            }
+            catch (SqlException ex)
+            {
+                if (cn.State == ConnectionState.Open)
+                    cn.Close();
+                ex.StackTrace.ToString();
+                throw new ApplicationException("Error al buscar los cursos por nombre" + ex.Message);
+            }
+            finally
+            {
+                cn.Close();
+            }
+            return curso;
+        }
     }
 }

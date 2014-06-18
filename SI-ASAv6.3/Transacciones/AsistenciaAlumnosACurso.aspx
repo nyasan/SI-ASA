@@ -20,8 +20,9 @@
         </Columns>
     </asp:GridView>
     <br />
+    </fieldset>
     <asp:Button ID="btn_registrar" runat="server" Text="Registrar Asistencia" 
         onclick="btn_registrar_Click" />
-</fieldset>
+
 </asp:Content>
 
