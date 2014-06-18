@@ -168,7 +168,7 @@ namespace SI_ASA_DAOv1
 
                 comprobar = cmd.ExecuteNonQuery();
 
-                if (comprobar > 0) ;
+                //if (comprobar > 0) ;
 
 
 
