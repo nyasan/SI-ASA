@@ -39,7 +39,8 @@
     <asp:ListBox ID="list_cursos" runat="server" 
         onselectedindexchanged="list_cursos_SelectedIndexChanged"></asp:ListBox><br />
 </fieldset>
-<asp:Button ID="btnRegistrar" runat="server" Text="Registrar" />
+<asp:Button ID="btnRegistrar" runat="server" Text="Registrar" 
+        onclick="btnRegistrar_Click" />
 
 </asp:Content>
 

@@ -61,10 +61,12 @@ namespace SI_ASA_DAOv1
             {
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
+                cmd.Parameters.AddWithValue("@id", id);
                 SqlDataReader dr = cmd.ExecuteReader();
-                
+
                 docente.legajo = (int)dr["legajo"];
-                //docente.horarioTrabajo = 
+                docente.docente = PersonaDao.obtenerPersona((int)(dr["id_persona"]));
+                docente.horarioTrabajo = HorarioDao.obtener((int)(dr["id_horario_trabajo"]));
                 docente.salario = (int)dr["salario"];
                 
                 dr.Close();
@@ -178,6 +180,39 @@ namespace SI_ASA_DAOv1
                 cn.Close();
             }
             return i;
+        }
+
+        public static Docente obtenerPorLegajo(int legajo)
+        {
+            Docente docente = new Docente();
+            string sql = "SELECT * FROM docentes d JOIN personas p ON (d.id_persona = p.id) WHERE d.legajo = @legajo";
+
+            SqlConnection cn = new SqlConnection();
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            //PONER LA STRINGCONNECTION CORRECTA!!!
+
+            try
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand(sql, cn);
+                cmd.Parameters.AddWithValue("@legajo", legajo);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                docente.legajo = (int)dr["legajo"];
+                docente.docente = PersonaDao.obtenerPersona((int)(dr["id_persona"]));
+                docente.horarioTrabajo = HorarioDao.obtener((int)(dr["id_horario_trabajo"]));
+                docente.salario = (int)dr["salario"];
+
+                dr.Close();
+                cn.Close();
+            }
+            catch (SqlException ex)
+            {
+                if (cn.State == ConnectionState.Open)
+                    cn.Close();
+                throw new ApplicationException("Error al buscar el Docente");
+            }
+            return docente;
         }
     }
 }

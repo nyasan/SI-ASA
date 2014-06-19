@@ -10,12 +10,11 @@ namespace SI_ASA_DAOv1
 {
     public class AlumnosxCursoDao
     {
-        private String conexion = "";
 
-        public static void add(List<Alumno> listAlumnos, int id_curso, DateTime fechaInscripcion)
+        public static void registrarCursadoAlumno(Alumno alumno, LinkedList<int> idCursos, DateTime fechaInscripcion)
         {
             int i = -1;
-            String sql = "INSERT INTO alumnos_x_curso (legajo, id_curso, fecha_inscripcion)";
+            String sql = "INSERT INTO alumno_x_curso (legajo, id_curso, fecha_inscripcion)";
             sql += "VALUES (@legajo, @id_curso, @fecha_inscripcion)";
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -28,10 +27,10 @@ namespace SI_ASA_DAOv1
                 SqlCommand cmd = new SqlCommand(sql, cn);
                 cmd.Transaction = sqltran;
              
-                while(i<listAlumnos.Count)
+                while(i<idCursos.Count)
                 {
-                    cmd.Parameters.AddWithValue("@legajo", listAlumnos.ElementAt(i).legajo);
-                    cmd.Parameters.AddWithValue("@id_curso", id_curso);
+                    cmd.Parameters.AddWithValue("@legajo", alumno.legajo);
+                    cmd.Parameters.AddWithValue("@id_curso", idCursos.ElementAt(i));
                     cmd.Parameters.AddWithValue("@fecha_inscripcion", fechaInscripcion);
                     cmd.ExecuteNonQuery();
                     i++;
@@ -42,7 +41,7 @@ namespace SI_ASA_DAOv1
             }
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error al insertar el Alumno");
+                throw new ApplicationException("Error al registrar el Alumno a cursado");
                 try
                 {
                     // Attempt to roll back the transaction.

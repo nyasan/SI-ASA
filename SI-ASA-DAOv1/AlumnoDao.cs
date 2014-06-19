@@ -61,14 +61,17 @@ namespace SI_ASA_DAOv1
         {
             List<Alumno> listAlumnos = new List<Alumno>();
 
-            string sql = "SELECT * FROM alumnos a JOIN personas pA ON (a.id_persona = pA.id) WHERE 1=1";
+            string sql = @"SELECT        a.legajo, a.id_persona, a.id_madre, a.id_padre, a.conoce_musica, a.id_nivel_estudio
+                         FROM            alumnos AS a INNER JOIN
+                         personas AS pA ON a.id_persona = pA.id
+                         WHERE        (1 = 1) ";
 
             if (nombre != "")
-                sql += " AND pA.nombre LIKE @nombre";
+                sql += " AND (pA.nombre LIKE @nombre)";
             if (apellido != "")
-                sql += " AND pA.apellido LIKE @apellido";
+                sql += " AND (pA.apellido LIKE @apellido)";
             if (legajo != 0)
-                sql += " AND pA.legajo=@legajo";
+                sql += " AND (a.legajo = @legajo)";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -120,7 +123,11 @@ namespace SI_ASA_DAOv1
         public static Alumno obtener(int id)
         {
             Alumno alumno = new Alumno();
-            string sql = "SELECT * FROM alumnos a JOIN personas pA ON (a.id_persona = pA.id) WHERE a.id_persona = @id";
+            string sql = @"SELECT        a.legajo, a.id_persona, a.id_madre, a.id_padre, a.conoce_musica, a.id_nivel_estudio, pA.id, pA.nombre, pA.apellido, pA.nro_documento, pA.domiclio, pA.telefono, pA.id_tipo_documento, pA.celular, pA.mail, 
+                         pA.fecha_nacimiento
+FROM                     alumnos AS a INNER JOIN
+                         personas AS pA ON a.id_persona = pA.id
+WHERE                    (a.id_persona = @id)";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -153,7 +160,11 @@ namespace SI_ASA_DAOv1
         public static Alumno obtenerPorLegajo(int legajo)
         {
             Alumno alumno = new Alumno();
-            string sql = "SELECT * FROM alumnos a JOIN personas pA ON (a.id_persona = pA.id) WHERE a.legajo=@legajo";
+            string sql = @"SELECT        a.legajo, a.id_persona, a.id_madre, a.id_padre, a.conoce_musica, a.id_nivel_estudio, pA.id, pA.nombre, pA.apellido, pA.nro_documento, pA.domiclio, pA.telefono, pA.id_tipo_documento, pA.celular, pA.mail, 
+                         pA.fecha_nacimiento
+                         FROM            alumnos AS a INNER JOIN
+                         personas AS pA ON a.id_persona = pA.id
+                         WHERE        (a.id_persona = @id)";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";

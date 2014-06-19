@@ -9,7 +9,7 @@ using SI_ASA_ENTIDADESv1;
 
 public partial class Transacciones_InscripcionAlumnoACursos : System.Web.UI.Page
 {
-    LinkedList<Curso> cursos;
+    private LinkedList<int> idCursos;
     protected void Page_Load(object sender, EventArgs e)
     {
         cargarLista(list_cursos);
@@ -40,10 +40,13 @@ public partial class Transacciones_InscripcionAlumnoACursos : System.Web.UI.Page
         gv_busqueda.DataBind();
     }
 
-
     protected void list_cursos_SelectedIndexChanged(object sender, EventArgs e)
     {
-        Curso curso = CursoDao.getCurso(list_cursos.SelectedItem.Text);
-        cursos.AddLast(curso);
+        idCursos.AddLast(list_cursos.SelectedIndex);
+    }
+    protected void btnRegistrar_Click(object sender, EventArgs e)
+    {
+        if(gv_busqueda.SelectedRow != null || idCursos.Count > 0)
+            AlumnosxCursoDao.registrarCursadoAlumno(AlumnoDao.obtenerPorLegajo(int.Parse(gv_busqueda.SelectedRow.Cells[1].Text)), idCursos, DateTime.Now);
     }
 }

@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <fieldset><legend>Inscripcion de Docentes</legend>
     
-    <label>Lista de Docentes</label><br />
+    <label>Buscar docentes y seleccionar uno</label><br />
     <fieldset><legend>Busqueda</legend>
         <label>Tipo de Documento</label>
         <asp:DropDownList ID="ddl_tipoDoc" runat="server"></asp:DropDownList><br />
@@ -19,7 +19,7 @@
         <asp:TextBox ID="txt_legajo" runat="server"></asp:TextBox><br /><br />
         <asp:Button ID="btn_Buscar" runat="server" Text="Buscar" />
         <br /><br />
-        <asp:GridView ID="gv_busqueda" runat="server" AutoGenerateColumns="False" AutoGenerateSelectButton="True">
+        <asp:GridView ID="gv_busqueda" runat="server" AutoGenerateColumns="False">
         
         <Columns>
             <asp:BoundField HeaderText="Legajo" DataField="legajo" />
@@ -31,8 +31,12 @@
     </asp:GridView>
     </fieldset>
 
+    <legend>Cursos</legend>
+    <br />
+    <label>Seleccionar los cursos en donde el docente dara clases</label><br />
     <label>Cursos</label>
-    <asp:DropDownList ID="dropCurso" runat="server"></asp:DropDownList><br />
+    <asp:ListBox ID="list_cursos" runat="server" 
+            onselectedindexchanged="list_cursos_SelectedIndexChanged"></asp:ListBox>
     </fieldset>
     <asp:Button ID="btnRegistrar" runat="server" Text="Registrar" 
         onclick="btnRegistrar_Click" />
