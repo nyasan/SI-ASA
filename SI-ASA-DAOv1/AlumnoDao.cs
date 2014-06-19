@@ -125,9 +125,9 @@ namespace SI_ASA_DAOv1
             Alumno alumno = new Alumno();
             string sql = @"SELECT        a.legajo, a.id_persona, a.id_madre, a.id_padre, a.conoce_musica, a.id_nivel_estudio, pA.id, pA.nombre, pA.apellido, pA.nro_documento, pA.domiclio, pA.telefono, pA.id_tipo_documento, pA.celular, pA.mail, 
                          pA.fecha_nacimiento
-FROM                     alumnos AS a INNER JOIN
+                         FROM                     alumnos AS a INNER JOIN
                          personas AS pA ON a.id_persona = pA.id
-WHERE                    (a.id_persona = @id)";
+                         WHERE                    (a.id_persona = @id)";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -199,8 +199,9 @@ WHERE                    (a.id_persona = @id)";
         public static void add(Alumno alumno, Persona madre, Persona alumnoP, Persona padre)
         {
             int i = -1;
-            String sql = "INSERT INTO alumnos (id_persona, id_madre, id_padre, conoce_musica, id_nivel_estudio)";
-            sql += "VALUES (@id_persona, @id_madre, @id_padre, @conoce_musica, @id_nivel_estudio)";
+            String sql = @"INSERT INTO alumnos
+                         (id_persona, id_madre, id_padre, conoce_musica, id_nivel_estudio)
+                         VALUES        (@id_persona,@id_madre,@id_padre,@conoce_musica,@id_nivel_estudio)";
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
@@ -257,7 +258,8 @@ WHERE                    (a.id_persona = @id)";
         {
             int i = -1;
 
-            string sql = "DELETE FROM alumnos a WHERE a.legajo=@legajo)";
+            string sql = @"DELETE FROM alumnos
+                         WHERE        (legajo = @legajo)";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -290,10 +292,9 @@ WHERE                    (a.id_persona = @id)";
         {
             int i = -1;
 
-            string sql = "UPDATE alumnos a SET a.id_persona=@id_persona_nuevo, a.id_madre=@id_madre_nuevo, a.id_padre=@id_padre_nuevo, ";
-            sql += "a.conoce_musica=@conoce_musica_nuevo, a.id_nivel_estudio=@id_nivel_estudio_nuevo ";
-            sql += "WHERE a.id_persona=@id_persona AND a.id_madre=@id_madre AND a.id_padre=@id_padre AND ";
-            sql += "a.conoce_musica=@conoce_musica AND a.id_nivel_estudio=@id_nivel_estudio";
+            string sql = @"UPDATE       alumnos
+                         SET                id_madre = @id_madre_nuevo, id_padre = @id_padre_nuevo, conoce_musica = @conoce_musica_nuevo, id_nivel_estudio = @id_nivel_estudio_nuevo
+                         WHERE        (id_persona = @id_persona) AND (id_madre = @id_madre) AND (id_padre = @id_padre) AND (conoce_musica = @conoce_musica) AND (id_nivel_estudio = @id_nivel_estudio)";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -353,7 +354,6 @@ WHERE                    (a.id_persona = @id)";
                         break;
                 }
                 
-                cmd.Parameters.AddWithValue("id_persona_nuevo", PersonaDao.update(personaAlumnoViejo, personaAlumnoNuevo));
                 cmd.Parameters.AddWithValue("id_madre_nuevo", PersonaDao.update(madreVieja, madreNueva));
                 cmd.Parameters.AddWithValue("id_padre_nuevo", PersonaDao.update(padreViejo, padreNuevo));
                 cmd.Parameters.AddWithValue("conoce_musica_nuevo", (Boolean)alumnoNuevo.conoceMusica);
@@ -382,7 +382,9 @@ WHERE                    (a.id_persona = @id)";
         {
             Boolean flag = false;
 
-            string sql = "SELECT * FROM alumnos a WHERE a.legajo=@legajo";
+            string sql = @"SELECT        legajo, id_persona, id_madre, id_padre, conoce_musica, id_nivel_estudio
+                         FROM            alumnos
+                         WHERE        (legajo = @legajo)";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -412,6 +414,76 @@ WHERE                    (a.id_persona = @id)";
             }
 
             return flag;
+        }
+
+        public static List<Alumno> buscarPorParametros(String nombre, String apellido, int legajo, int numero, int tipo_documento)
+        {
+            List<Alumno> listAlumnos = new List<Alumno>();
+
+            string sql = @"SELECT        a.legajo, a.id_persona, a.id_madre, a.id_padre, a.conoce_musica, a.id_nivel_estudio
+                         FROM            alumnos AS a INNER JOIN
+                         personas AS pA ON a.id_persona = pA.id
+                         WHERE        (1 = 1) ";
+
+            if (nombre != "")
+                sql += " AND (pA.nombre LIKE @nombre)";
+            if (apellido != "")
+                sql += " AND (pA.apellido LIKE @apellido)";
+            if (legajo != 0)
+                sql += " AND (a.legajo = @legajo)";
+            if (numero != 0 && tipo_documento != 0)
+                sql += " AND (a.numero = @numero) AND (a.tipo_documento = @tipo_documento)";
+            SqlConnection cn = new SqlConnection();
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            //PONER LA STRINGCONNECTION CORRECTA!!!
+
+            try
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand(sql, cn);
+
+                if (nombre != "")
+                    cmd.Parameters.AddWithValue("@nombre", "%" + nombre + "%");
+                if (apellido != "")
+                    cmd.Parameters.AddWithValue("@apellido", "%" + apellido + "%");
+                if (legajo != 0)
+                    cmd.Parameters.AddWithValue("@legajo", legajo);
+                if (numero != 0 && tipo_documento != 0)
+                {
+                    cmd.Parameters.AddWithValue("@numero", numero);
+                    cmd.Parameters.AddWithValue("@tipo_documento", tipo_documento);
+                }
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                int c = 0;
+                while (dr.Read())
+                {
+                    Alumno alumno = new Alumno()
+                    {
+                        legajo = (int)dr["legajo"],
+                        conoceMusica = (Boolean)dr["conoce_musica"],
+                        alumno = PersonaDao.obtenerPersona((int)dr["id_persona"]),
+                        madre = PersonaDao.obtenerPersona((int)(dr["id_madre"])),
+                        padre = PersonaDao.obtenerPersona((int)(dr["id_padre"])),
+                        nivelEstudio = NivelEstudioDao.obtener((int)(dr["id_nivel_estudio"]))
+                    };
+
+                    listAlumnos.Add(alumno); //lleno la coleccion en memoria
+                    c++;
+                }
+                dr.Close();
+
+            }
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Error al buscar los Alumnos");
+            }
+            finally
+            {
+                cn.Close();
+            }
+            return listAlumnos;
+
         }
 
     }

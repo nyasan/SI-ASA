@@ -32,10 +32,68 @@
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
-                        <asp:MenuItem NavigateUrl="~/ABMC/Alumno.aspx" Text="Alumno"/>
-                        <asp:MenuItem NavigateUrl="~/ABMC/Curso.aspx" Text="Curso"/>
-                        <asp:MenuItem NavigateUrl="~/ABMC/Docente.aspx" Text="Docente"/>
-                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="Acerca de"/>
+                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="Inicio" Value="Inicio"/>
+                        <asp:MenuItem NavigateUrl="~/Pestañas/Alumnos.aspx" Text="Alumnos" 
+                            Value="Alumnos">
+                            <asp:MenuItem NavigateUrl="~/ABMC/Alumno.aspx" Text="Nuevo " Value="Nuevo ">
+                            </asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/ABMC/Alumno.aspx" Text="Eliminar" Value="Eliminar">
+                            </asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/ABMC/Alumno.aspx" Text="Modificar" 
+                                Value="Modificar"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/ABMC/grillaAlumnos.aspx" Text="Consultar" 
+                                Value="Consultar"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Transacciones/AsistenciaAlumnosACurso.aspx" 
+                            Text="Asistencia" Value="Asistencia"/>
+                        <asp:MenuItem NavigateUrl="~/Pestañas/Cursos.aspx" Text="Cursos" Value="Cursos">
+                            <asp:MenuItem NavigateUrl="~/ABMC/Curso.aspx" Text="Nuevo Curso" 
+                                Value="Nuevo Curso"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/ABMC/Docente.aspx" Text="Modificar Curso" 
+                                Value="Modificar Curso"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/ABMC/Curso.aspx" Text="Eliminar Curso" 
+                                Value="Eliminar Curso"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Transacciones/InscripcionAlumnoACursos.aspx" 
+                                Text="Inscripcion Alumnos" Value="Inscripcion Alumnos"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Transacciones/InscripcionDocenteACursos.aspx" 
+                                Text="Gestionar Asignacion de Docentes" 
+                                Value="Gestionar Asignacion de Docentes"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/ABMC/grillaCurso.aspx" Text="Consultar Cursos" 
+                                Value="Consultar Cursos"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Pestañas/Docentes.aspx" Text="Docentes" 
+                            Value="Docentes">
+                            <asp:MenuItem NavigateUrl="~/ABMC/Docente.aspx" Text="Nuevo" Value="Nuevo">
+                            </asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/ABMC/Docente.aspx" Text="Eliminar" 
+                                Value="Eliminar"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/ABMC/Docente.aspx" Text="Modificar" 
+                                Value="Modificar"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/ABMC/grillaCurso.aspx" Text="Consultar" 
+                                Value="Consultar"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Pestañas/Transacciones.aspx" Text="Transacciones" 
+                            Value="Transacciones">
+                            <asp:MenuItem NavigateUrl="~/Transacciones/AsistenciaAlumnosACurso.aspx" 
+                                Text="Asistencia de Alumnos" Value="Asistencia de Alumnos"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Transacciones/InscripcionAlumnoACursos.aspx" 
+                                Text="Inscripcion de Alumnos a Cursado" 
+                                Value="Inscripcion de Alumnos a Cursado"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Transacciones/InscripcionDocenteACursos.aspx" 
+                                Text="Inscripcion de Docentes a Cursado" 
+                                Value="Inscripcion de Docentes a Cursado"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Pestañas/Informes.aspx" Text="Informes" 
+                            Value="Informes">
+                            <asp:MenuItem NavigateUrl="~/Informes/ListadoAlumnos.aspx" Text="Alumnos" 
+                                Value="Alumnos"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Informes/ListadoCursos.aspx" Text="Cursos" 
+                                Value="Cursos"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Informes/ListadoDocentes.aspx" Text="Docentes" 
+                                Value="Docentes"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Informes/Listado_faltas_x_curso.rdlc" 
+                                Text="Ausentismo de Alumnos" Value="Ausentismo de Alumnos"></asp:MenuItem>
+                        </asp:MenuItem>
                     </Items>
                 </asp:Menu>
             </div>

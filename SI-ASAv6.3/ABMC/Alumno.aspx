@@ -20,7 +20,7 @@
         <legend>Alumno</legend>
         <fieldset><legend>Datos Personales</legend>
             <label>Legajo</label>
-            <asp:TextBox ID="txt_legajo" runat="server"></asp:TextBox> <br />
+            <asp:TextBox ID="txt_legajo" runat="server" Enabled="False"></asp:TextBox> <br />
             
             <label>Nombre</label>
             <asp:TextBox ID="txt_Nombre" runat="server"></asp:TextBox>
@@ -63,7 +63,7 @@
             <label>Fecha de Nacimiento</label>
             <asp:TextBox ID="txt_FechaNacimiento" runat="server"></asp:TextBox>
             <asp:RequiredFieldValidator ID="rfv_FechaNacimiento" runat="server" ErrorMessage="*Debe completar dicho campo" ControlToValidate="txt_FechaNacimiento"></asp:RequiredFieldValidator>
-            <asp:RegularExpressionValidator ID="rev_FechaNacimiento" runat="server" ErrorMessage="Fecha incorrecta" ValidationExpression="^(((((0[1-9])|(1\d)|(2[0-8]))-((0[1-9])|(1[0-2])))|((31-((0[13578])|(1[02])))|((29|30)-((0[1,3-9])|(1[0-2])))))-((20[0-9][0-9]))|(29-02-20(([02468][048])|([13579][26]))))$" ControlToValidate="txt_FechaNacimiento" BorderColor="Red"></asp:RegularExpressionValidator>
+            
             <br />
         </fieldset>
         <fieldset><legend>Datos de la Madre</legend>

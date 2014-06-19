@@ -76,6 +76,35 @@ namespace SI_ASA_DAOv1
             return horario;
         }
 
+        public static int obtenerID(DateTime desde, DateTime hasta)
+        {
+            int id = -1;
+            string sql = "SELECT * FROM horarios WHERE horario_inicio = @desde, horario_fin = @hasta";
+
+            SqlConnection cn = new SqlConnection();
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            //PONER LA STRINGCONNECTION CORRECTA!!!
+
+            try
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand(sql, cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                id = (int) dr["id_horario"];
+
+                dr.Close();
+                cn.Close();
+            }
+            catch (SqlException ex)
+            {
+                if (cn.State == ConnectionState.Open)
+                    cn.Close();
+                throw new ApplicationException("Error al buscar el Horario");
+            }
+            return id;
+        }
+
         //Retorna TRUE si se insertó correctamente; FALSE en todo otro caso.
         public static int add(Horario horario)
         {

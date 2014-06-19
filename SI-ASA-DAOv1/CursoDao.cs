@@ -14,55 +14,54 @@ namespace SI_ASA_DAOv1
 {
     public class CursoDao
     {
-        public static void Insertar(Curso curso)
+        public static void Insertar(Curso curso, Horario horarioTrabajo)
         {
-            int comprobar = 0;
-            string sqlCurso = "INSERT INTO cursos (nombre,descripcion,id_horario) values (@nombre,@descripcion,@id_horario)";
-            string sqlHorario = "insert into horario values (@horario_desde, @horario_hasta)";
+            string sqlCurso = @"INSERT INTO cursos
+                              (nombre, descripcion, id_horario)
+                              VALUES        (@nombre,@descripcion,@id_horario)";
+            //string sqlHorario = "insert into horario values (@horario_desde, @horario_hasta)";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             try
             {
                 cn.Open();
-                SqlCommand cmd = new SqlCommand(sqlHorario, cn);
-                cmd.Parameters.AddWithValue("horario_desde", curso.hora_desde);
-                cmd.Parameters.AddWithValue("horario_hasta", curso.hora_hasta);
-
-                int idHorario = 0;
+                //Se reemplaza por la llamada al metodo add() de HorarioDao:
+                //SqlCommand cmd = new SqlCommand(sqlHorario, cn);
+                //cmd.Parameters.AddWithValue("horario_desde", curso.hora_desde);
+                //cmd.Parameters.AddWithValue("horario_hasta", curso.hora_hasta);
+                //int idHorario = 0;
                 //cmd.ExecuteNonQuery();
-                idHorario = Convert.ToInt32(cmd.ExecuteScalar());
+                //idHorario = Convert.ToInt32(cmd.ExecuteScalar());
+                //cmd = null;
 
-                cmd = null;
-
-                cmd = new SqlCommand(sqlCurso, cn);
+                SqlCommand cmd = new SqlCommand(sqlCurso, cn);
 
                 cmd.Parameters.AddWithValue("nombre", curso.nombre);
                 cmd.Parameters.AddWithValue("descripcion", curso.descripcion);
-                cmd.Parameters.AddWithValue("id_horario", idHorario);
+                cmd.Parameters.AddWithValue("id_horario", HorarioDao.add(horarioTrabajo));
 
-                comprobar = cmd.ExecuteNonQuery();
-
-                if (comprobar > 0) ;
-
-
+                cmd.ExecuteNonQuery();
 
             } catch (SqlException ex)
             {
-                if (cn.State == ConnectionState.Open)
-                    cn.Close();
+                
                 throw new ApplicationException("Error al insertar el curso");
             }
             finally
             {
-                cn.Close();
+                if (cn.State == ConnectionState.Open)
+                    cn.Close();
             }
 
         }
         public static List<Curso> buscarPorParametros(String nombre)
         {
             List<Curso> listCursos = new List<Curso>();
-            string sql = "select * from cursos join horarios on (cursos.id_horario=horarios.id_horario) where cursos.nombre like @nombre";
+            string sql = @"SELECT        cursos.id_curso, cursos.nombre, cursos.descripcion, cursos.id_horario, horarios.id_horario AS Expr1, horarios.horario_inicio, horarios.horario_fin
+                         FROM            cursos INNER JOIN
+                         horarios ON cursos.id_horario = horarios.id_horario
+                         WHERE        (cursos.nombre LIKE @nombre)";
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             try
@@ -102,7 +101,9 @@ namespace SI_ASA_DAOv1
         public static List<Curso> ObtenerTodo()
         {
             List<Curso> listCursos = new List<Curso>();
-            string sql = "select * from cursos join horarios on (cursos.id_horario=horarios.id_horario)";
+            string sql = @"SELECT        cursos.id_curso, cursos.nombre, cursos.descripcion, cursos.id_horario, horarios.id_horario AS Expr1, horarios.horario_inicio, horarios.horario_fin
+                         FROM            cursos INNER JOIN
+                         horarios ON cursos.id_horario = horarios.id_horario";
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             try
@@ -138,57 +139,53 @@ namespace SI_ASA_DAOv1
 
         }
 
-        public static void update(Curso cursoViejo, Curso cursoNuevo)
+        public static void update(Curso cursoViejo, Curso cursoNuevo, Horario horarioViejo, Horario horarioNuevo)
         {
             int comprobar = 0;
-            string sqlCurso = "update curso set nombre=@nombre, descripcion=@descripcion where nombre like @nombre_viejo and descripcion like @descripcion_vieja";
-            string sqlHorario = "update horario set hora_desde=@hora_desde, hora_hasta=@hora_hasta where hora_desde=@hora_desde_vieja and hora_hasta=hora_hasta_vieja";
+            string sqlCurso = @"UPDATE       cursos
+                              SET          nombre = @nombre, descripcion = @descripcion, id_horario = @id_horario
+                              WHERE        (nombre LIKE @nombre_viejo) AND (descripcion LIKE @descripcion_vieja) AND (id_horario = @id_horario_viejo)";
+            //string sqlHorario = "update horario set hora_desde=@hora_desde, hora_hasta=@hora_hasta where hora_desde=@hora_desde_vieja and hora_hasta=hora_hasta_vieja";
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=maquis;Initial Catalog=Pymes;User ID=avisuales2;Password=avisuales2";
             try
             {
                 cn.Open();
-                SqlCommand cmd = new SqlCommand(sqlHorario, cn);
-                cmd.Parameters.AddWithValue("horario_desde", cursoNuevo.hora_desde);
-                cmd.Parameters.AddWithValue("horario_hasta", cursoNuevo.hora_hasta);
-                cmd.Parameters.AddWithValue("hora_desde_vieja", cursoViejo.hora_desde);
-                cmd.Parameters.AddWithValue("hora_hasta_vieja", cursoViejo.hora_hasta);
+                //Se reemplaza por el metodo update() de HorarioDao:
+                //SqlCommand cmd = new SqlCommand(sqlHorario, cn);
+                //cmd.Parameters.AddWithValue("horario_desde", cursoNuevo.hora_desde);
+                //cmd.Parameters.AddWithValue("horario_hasta", cursoNuevo.hora_hasta);
+                //cmd.Parameters.AddWithValue("hora_desde_vieja", cursoViejo.hora_desde);
+                //cmd.Parameters.AddWithValue("hora_hasta_vieja", cursoViejo.hora_hasta);
+                //cmd.ExecuteNonQuery();
+                //cmd = null;
 
-                cmd.ExecuteNonQuery();
-
-                cmd = null;
-
-                cmd = new SqlCommand(sqlCurso, cn);
-
+                SqlCommand cmd = new SqlCommand(sqlCurso, cn);
+                cmd.Parameters.AddWithValue("id_horario", HorarioDao.update(horarioViejo, horarioNuevo));
+                cmd.Parameters.AddWithValue("id_horario_viejo", HorarioDao.obtenerID(horarioViejo.desde, horarioViejo.hasta));
                 cmd.Parameters.AddWithValue("nombre", cursoNuevo.nombre);
                 cmd.Parameters.AddWithValue("descripcion", cursoNuevo.descripcion);
                 cmd.Parameters.AddWithValue("nombre_viejo", cursoViejo.nombre);
                 cmd.Parameters.AddWithValue("descripcion_vieja", cursoViejo.descripcion);
 
-
                 comprobar = cmd.ExecuteNonQuery();
-
-                //if (comprobar > 0) ;
-
-
-
             }
             catch (SqlException ex)
             {
-                if (cn.State == ConnectionState.Open)
-                    cn.Close();
                 throw new ApplicationException("Error al modificar el curso");
             }
             finally
             {
-                cn.Close();
+                if (cn.State == ConnectionState.Open)
+                    cn.Close();
             }
         }
 
         public static void delete(Curso curso)
         {
             int comprobar = 0;
-            string sqlCurso = "delete on curso where nombre like @nombre and descripcion like @descripcion";
+            string sqlCurso = @"DELETE FROM cursos
+WHERE                         (nombre LIKE @nombre) AND (descripcion LIKE @descripcion)";
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=maquis;Initial Catalog=Pymes;User ID=avisuales2;Password=avisuales2";
             try
@@ -223,7 +220,10 @@ namespace SI_ASA_DAOv1
         public static Curso getCurso(string nombre)
         {
             Curso curso = new Curso();
-            string sql = "select * from cursos join horarios on (cursos.id_horario=horarios.id_horario) where cursos.nombre like @nombre";
+            string sql = @"SELECT        cursos.id_curso, cursos.nombre, cursos.descripcion, cursos.id_horario, horarios.id_horario AS Expr1, horarios.horario_inicio, horarios.horario_fin
+                         FROM            cursos INNER JOIN
+                                                horarios ON cursos.id_horario = horarios.id_horario
+                         WHERE        (cursos.nombre LIKE @nombre)";
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             try

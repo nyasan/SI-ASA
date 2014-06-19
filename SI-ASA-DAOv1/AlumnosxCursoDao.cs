@@ -14,8 +14,9 @@ namespace SI_ASA_DAOv1
         public static void registrarCursadoAlumno(Alumno alumno, LinkedList<int> idCursos, DateTime fechaInscripcion)
         {
             int i = -1;
-            String sql = "INSERT INTO alumno_x_curso (legajo, id_curso, fecha_inscripcion)";
-            sql += "VALUES (@legajo, @id_curso, @fecha_inscripcion)";
+            String sql = @"INSERT INTO alumno_x_curso
+                         (id_curso, fecha_inscripcion, legajo_alumno)
+                         VALUES        (@id_curso,@fecha_inscripcion,@legajo_alumno)";
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             SqlTransaction sqltran = cn.BeginTransaction();
@@ -29,7 +30,7 @@ namespace SI_ASA_DAOv1
              
                 while(i<idCursos.Count)
                 {
-                    cmd.Parameters.AddWithValue("@legajo", alumno.legajo);
+                    cmd.Parameters.AddWithValue("@legajo_alumno", alumno.legajo);
                     cmd.Parameters.AddWithValue("@id_curso", idCursos.ElementAt(i));
                     cmd.Parameters.AddWithValue("@fecha_inscripcion", fechaInscripcion);
                     cmd.ExecuteNonQuery();

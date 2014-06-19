@@ -16,7 +16,9 @@ namespace SI_ASA_DAOv1
         {
             List<Persona> listPersonas = new List<Persona>();
 
-            string sql = "SELECT * FROM personas p JOIN tipo_documento t ON (p.id_tipo_documento = t.id_tipo_documento) ";
+            string sql = @"SELECT        p.id, p.nombre, p.apellido, p.nro_documento, p.domiclio, p.telefono, p.id_tipo_documento, p.celular, p.mail, p.fecha_nacimiento, t.id_tipo_documento AS Expr1, t.descripcion
+                         FROM            personas AS p INNER JOIN
+                         tipo_documento AS t ON p.id_tipo_documento = t.id_tipo_documento";
             
             //(if (tipoDoc.hasValue() || numDoc == -1)
             if (tipoDoc == null || numDoc == -1)
@@ -176,7 +178,8 @@ namespace SI_ASA_DAOv1
         {
             int i = -1;
 
-            string sql = "DELETE FROM personas p WHERE p.nro_documento=@nro_documento AND p.id_tipo_documento=@id_tipo_documento)";
+            string sql = @"DELETE FROM personas
+                           WHERE        (nro_documento = @nro_documento) AND (id_tipo_documento = @id_tipo_documento)";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -216,11 +219,11 @@ namespace SI_ASA_DAOv1
         public static int update(Persona personaVieja, Persona personaNueva)
         {
             int i = -1;
-            string sql = "UPDATE personas p SET p.nombre=@nombre_nuevo, p.apellido=@apellido_nuevo, p.nro_documento=@nro_documento_nuevo, ";
-            sql += "p.domicilio=@domicilio_nuevo, p.telefono=@telefono_nuevo, p.id_tipo_documento=id_tipo_documento_nuevo, ";
-            sql += "p.celular=@celular_nuevo, p.mail=@mail_nuevo, p.fecha_nacimiento=@fecha_nacimiento_nuevo ";
-            sql += "WHERE p.nombre=@nombre AND p.apellido=@apellido AND p.nro_documento=@nro_documento AND p.domicilio=@domicilio AND p.telefono=@telefono AND ";
-            sql += "p.id_tipo_documento=@id_tipo_documento AND p.celular=@celular AND p.mail=@mail AND p.fecha_nacimiento=@fecha_nacimiento";
+            string sql = @"UPDATE       personas
+                         SET                nombre = @nombre_nuevo, apellido = @apellido_nuevo, nro_documento = @nro_documento_nuevo, telefono = @telefono_nuevo, id_tipo_documento = @id_tipo_documento_nuevo, celular = @celular, 
+                         mail = @mail, fecha_nacimiento = @fecha_nacimiento, domiclio = @domicilio_nuevo
+                         WHERE        (nombre = @nombre) AND (apellido = @apellido) AND (nro_documento = @nro_documento) AND (telefono = @telefono) AND (id_tipo_documento = @id_tipo_documento) AND (celular = @celular) AND 
+                         (mail = @mail) AND (fecha_nacimiento = @fecha_nacimiento) AND (domiclio = @domicilio)";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -289,7 +292,9 @@ namespace SI_ASA_DAOv1
         public static Persona obtenerPorDatos(int numDoc, String descripcionTipoDoc)
         {
             Persona persona = new Persona();
-            string sql = "SELECT * FROM personas p WHERE p.nro_documento = @nro_documento AND p.id_tipo_documento = @id_tipo_documento";
+            string sql = @"SELECT        id, nombre, apellido, nro_documento, domiclio, telefono, id_tipo_documento, celular, mail, fecha_nacimiento
+                         FROM            personas
+                         WHERE        (nro_documento = @nro_documento) AND (id_tipo_documento = @id_tipo_documento)";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";

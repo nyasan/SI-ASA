@@ -14,7 +14,9 @@ namespace SI_ASA_DAOv1
         {
             List<Docente> listDocentes = new List<Docente>();
 
-            string sql = "SELECT * FROM docentes d JOIN personas p ON (d.id_persona = p.id) ";
+            string sql = @"SELECT        d.legajo, d.id_persona, d.id_horario_trabajo, d.salario, p.id, p.nombre, p.apellido, p.nro_documento, p.domiclio, p.telefono, p.id_tipo_documento, p.celular, p.mail, p.fecha_nacimiento
+                         FROM            docentes AS d INNER JOIN
+                         personas AS p ON d.id_persona = p.id";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -51,7 +53,10 @@ namespace SI_ASA_DAOv1
         public static Docente obtener(int id)
         {
             Docente docente = new Docente();
-            string sql = "SELECT * FROM docentes d JOIN personas p ON (d.id_persona = p.id) WHERE d.id_persona = @id";
+            string sql = @"SELECT        d.legajo, d.id_persona, d.id_horario_trabajo, d.salario, p.id, p.nombre, p.apellido, p.nro_documento, p.domiclio, p.telefono, p.id_tipo_documento, p.celular, p.mail, p.fecha_nacimiento
+                         FROM            docentes AS d INNER JOIN
+                         personas AS p ON d.id_persona = p.id
+                         WHERE        (d.id_persona = @id)";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -85,7 +90,9 @@ namespace SI_ASA_DAOv1
         public static int add(Docente docente, Persona docenteP, Horario horarioTrabajo)
         {
             int i = -1;
-            string sql = "INSERT INTO docentes (id_persona, id_horario_trabajo, salario) VALUES (@id_persona, @id_horario_trabajo, @salario)";
+            string sql = @"INSERT INTO docentes
+                         (id_persona, id_horario_trabajo, salario)
+                         VALUES        (@id_persona,@id_horario_trabajo,@salario)";
             
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -118,7 +125,8 @@ namespace SI_ASA_DAOv1
         {
             int i = -1;
 
-            string sql = "DELETE FROM docentes d WHERE d.legajo=@legajo)";
+            string sql = @"DELETE FROM docentes
+                         WHERE        (legajo = @legajo)";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -149,9 +157,9 @@ namespace SI_ASA_DAOv1
         {
             int i = -1;
 
-            string sql = "UPDATE docentes d SET d.id_persona=@id_persona_nuevo, ";
-            sql += "d.id_horario_trabajo=@id_horario_trabajo_nuevo, d.salario=@salario_nuevo ";
-            sql += "WHERE d.id_persona=@id_persona AND d.id_horario_trabajo=@horario_trabajo AND d.salario=@salario";
+            string sql = @"UPDATE       docentes
+                         SET                id_horario_trabajo = @id_horario_trabajo_nuevo, salario = @salario_nuevo
+                         WHERE        (id_persona = @id_persona) AND (id_horario_trabajo = @horario_trabajo) AND (salario = @salario)";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -161,7 +169,6 @@ namespace SI_ASA_DAOv1
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
 
-                cmd.Parameters.AddWithValue("id_persona_nuevo", PersonaDao.update(personaVieja, personaNueva));
                 cmd.Parameters.AddWithValue("id_horario_trabajo_nuevo", HorarioDao.update(horarioViejo, horarioNuevo));
                 cmd.Parameters.AddWithValue("salario_nuevo", docenteNuevo.salario);
 
@@ -185,7 +192,10 @@ namespace SI_ASA_DAOv1
         public static Docente obtenerPorLegajo(int legajo)
         {
             Docente docente = new Docente();
-            string sql = "SELECT * FROM docentes d JOIN personas p ON (d.id_persona = p.id) WHERE d.legajo = @legajo";
+            string sql = @"SELECT        d.legajo, d.id_persona, d.id_horario_trabajo, d.salario, p.id, p.nombre, p.apellido, p.nro_documento, p.domiclio, p.telefono, p.id_tipo_documento, p.celular, p.mail, p.fecha_nacimiento
+                         FROM            docentes AS d INNER JOIN
+                         personas AS p ON d.id_persona = p.id
+                         WHERE        (d.legajo = @legajo)";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
