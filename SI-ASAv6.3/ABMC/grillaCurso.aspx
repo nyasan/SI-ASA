@@ -11,8 +11,14 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <label>Nombre</label><asp:TextBox ID="txtNombre" runat="server"></asp:TextBox><br />
     <asp:Button ID="btnBuscar" runat="server" Text="Buscar" 
-        onclick="btnBuscar_Click" /><br />
- <asp:GridView ID="grillaCursos" runat="server">
+        onclick="btnBuscar_Click" /><br /><br />
+ <asp:GridView ID="grillaCursos" runat="server" AutoGenerateColumns="False">
+     <Columns>
+         <asp:BoundField DataField="nombre" HeaderText="Nombre" />
+         <asp:BoundField DataField="hora_desde" HeaderText="Horario Inicio" />
+         <asp:BoundField DataField="hora_hasta" HeaderText="Horario Fin" />
+         <asp:BoundField DataField="descripcion" HeaderText="Descripcion" />
+     </Columns>
     </asp:GridView>
 </asp:Content>
 

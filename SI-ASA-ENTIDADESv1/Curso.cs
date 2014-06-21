@@ -7,6 +7,7 @@ namespace SI_ASA_ENTIDADESv1
 {
     public class Curso
     {
+        public int id_curso { get; set; }
         public String nombre { get; set; }
         public String hora_desde { get; set; }
         public String hora_hasta { get; set; }

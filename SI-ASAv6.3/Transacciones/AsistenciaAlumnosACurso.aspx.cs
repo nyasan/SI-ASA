@@ -44,4 +44,5 @@ public partial class Transacciones_AsistenciaAlumnosACurso : System.Web.UI.Page
         Alumno alumno = AlumnoDao.obtenerPorLegajo(int.Parse(gv_grillaAlumnos.SelectedRow.Cells[1].Text));
         alumnos.AddLast(alumno);
     }
+    
 }

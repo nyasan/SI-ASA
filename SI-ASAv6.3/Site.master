@@ -15,7 +15,7 @@
         <div class="header">
             <div class="title">
                 <h1>
-                    Mi aplicación ASP.NET
+                    Academia Solidaria de Arte
                 </h1>
             </div>
             <div class="loginDisplay">
@@ -32,7 +32,7 @@
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
-                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="Inicio" Value="Inicio"/>
+                        <asp:MenuItem NavigateUrl="~/Account/Login.aspx" Text="Inicio" Value="Inicio"/>
                         <asp:MenuItem NavigateUrl="~/Pestañas/Alumnos.aspx" Text="Alumnos" 
                             Value="Alumnos">
                             <asp:MenuItem NavigateUrl="~/ABMC/Alumno.aspx" Text="Nuevo " Value="Nuevo ">
@@ -49,7 +49,7 @@
                         <asp:MenuItem NavigateUrl="~/Pestañas/Cursos.aspx" Text="Cursos" Value="Cursos">
                             <asp:MenuItem NavigateUrl="~/ABMC/Curso.aspx" Text="Nuevo Curso" 
                                 Value="Nuevo Curso"></asp:MenuItem>
-                            <asp:MenuItem NavigateUrl="~/ABMC/Docente.aspx" Text="Modificar Curso" 
+                            <asp:MenuItem NavigateUrl="~/ABMC/Curso.aspx" Text="Modificar Curso" 
                                 Value="Modificar Curso"></asp:MenuItem>
                             <asp:MenuItem NavigateUrl="~/ABMC/Curso.aspx" Text="Eliminar Curso" 
                                 Value="Eliminar Curso"></asp:MenuItem>
@@ -69,7 +69,7 @@
                                 Value="Eliminar"></asp:MenuItem>
                             <asp:MenuItem NavigateUrl="~/ABMC/Docente.aspx" Text="Modificar" 
                                 Value="Modificar"></asp:MenuItem>
-                            <asp:MenuItem NavigateUrl="~/ABMC/grillaCurso.aspx" Text="Consultar" 
+                            <asp:MenuItem NavigateUrl="~/ABMC/grillaDocentes.aspx" Text="Consultar" 
                                 Value="Consultar"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/Pestañas/Transacciones.aspx" Text="Transacciones" 

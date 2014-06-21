@@ -47,9 +47,6 @@ public partial class ABMC_Alumno : System.Web.UI.Page
         ddl.DataBind();
         ddl.Items.Insert(0, new ListItem("Elija una opción...", "0"));
     }
-
-    
-
     protected void btn_Eliminar_Click(object sender, EventArgs e)
     {
         AlumnoDao.delete(AlumnoDao.obtenerPorLegajo(int.Parse(txt_legajo.Text)));

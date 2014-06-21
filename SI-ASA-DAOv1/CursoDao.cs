@@ -115,6 +115,7 @@ namespace SI_ASA_DAOv1
                 {
                     Curso curso = new Curso()
                     {
+                        id_curso = int.Parse(dr["id_curso"].ToString()),
                         nombre = dr["nombre"].ToString(),
                         descripcion = dr["descripcion"].ToString(),
                         hora_desde = dr["horario_inicio"].ToString(),
@@ -183,9 +184,8 @@ namespace SI_ASA_DAOv1
 
         public static void delete(Curso curso)
         {
-            int comprobar = 0;
             string sqlCurso = @"DELETE FROM cursos
-WHERE                         (nombre LIKE @nombre) AND (descripcion LIKE @descripcion)";
+                              WHERE                         (nombre LIKE @nombre) AND (descripcion LIKE @descripcion)";
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=maquis;Initial Catalog=Pymes;User ID=avisuales2;Password=avisuales2";
             try
@@ -196,14 +196,7 @@ WHERE                         (nombre LIKE @nombre) AND (descripcion LIKE @descr
 
                 cmd.Parameters.AddWithValue("nombre", curso.nombre);
                 cmd.Parameters.AddWithValue("descripcion", curso.descripcion);
-
-
-                comprobar = cmd.ExecuteNonQuery();
-
-                if (comprobar > 0) ;
-
-
-
+                cmd.ExecuteNonQuery();
             }
             catch (SqlException ex)
             {
@@ -232,7 +225,7 @@ WHERE                         (nombre LIKE @nombre) AND (descripcion LIKE @descr
                 SqlCommand cmd = new SqlCommand(sql, cn);
                 cmd.Parameters.AddWithValue("@nombre", "%" + nombre + "%");
                 SqlDataReader dr = cmd.ExecuteReader();
-                
+                dr.Read();
                 curso.nombre = dr["nombre"].ToString();
                 curso.descripcion = dr["descripcion"].ToString();
                 curso.hora_desde = dr["horario_inicio"].ToString();
@@ -242,14 +235,13 @@ WHERE                         (nombre LIKE @nombre) AND (descripcion LIKE @descr
             }
             catch (SqlException ex)
             {
-                if (cn.State == ConnectionState.Open)
-                    cn.Close();
                 ex.StackTrace.ToString();
                 throw new ApplicationException("Error al buscar los cursos por nombre" + ex.Message);
             }
             finally
             {
-                cn.Close();
+                if (cn.State == ConnectionState.Open)
+                    cn.Close();
             }
             return curso;
         }

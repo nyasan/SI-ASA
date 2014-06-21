@@ -7,7 +7,7 @@ namespace SI_ASA_ENTIDADESv1
 {
     public class Horario
     {
-        public DateTime desde { get; set; }
-        public DateTime hasta { get; set; }
+        public string desde { get; set; }
+        public string hasta { get; set; }
     }
 }

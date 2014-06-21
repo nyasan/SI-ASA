@@ -29,13 +29,14 @@ namespace SI_ASA_DAOv1
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    Docente docente = new Docente()
-                    {
-                        legajo = (int)dr["legajo"],
-                        //horarioTrabajo = 
-                        salario = (int)dr["salario"]
-                    };
-                    listDocentes.Add(docente); //lleno la coleccion en memoria
+                    Docente docente = new Docente();
+
+                    docente.docente = PersonaDao.obtenerPersona(int.Parse(dr["id_persona"].ToString()));
+                    docente.legajo = int.Parse(dr["legajo"].ToString());
+                    docente.horarioTrabajo = HorarioDao.obtener((int)dr["id_horario_trabajo"]);
+                    docente.salario = float.Parse(dr["salario"].ToString());
+                    
+                    listDocentes.Add(docente);
                 }
                 dr.Close();
                 cn.Close();

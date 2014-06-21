@@ -127,7 +127,7 @@ namespace SI_ASA_DAOv1
                          pA.fecha_nacimiento
                          FROM                     alumnos AS a INNER JOIN
                          personas AS pA ON a.id_persona = pA.id
-                         WHERE                    (a.id_persona = @id)";
+                         WHERE                    (a.id_persona = @idPersona)";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -137,6 +137,7 @@ namespace SI_ASA_DAOv1
             {
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
+                cmd.Parameters.AddWithValue("@idPersona", id);
                 SqlDataReader dr = cmd.ExecuteReader();
                
                 alumno.legajo = (int)dr["legajo"];
@@ -164,7 +165,7 @@ namespace SI_ASA_DAOv1
                          pA.fecha_nacimiento
                          FROM            alumnos AS a INNER JOIN
                          personas AS pA ON a.id_persona = pA.id
-                         WHERE        (a.id_persona = @id)";
+                         WHERE        (a.legajo = @legajo)";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -174,6 +175,7 @@ namespace SI_ASA_DAOv1
             {
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
+                cmd.Parameters.AddWithValue("@legajo", legajo);
                 SqlDataReader dr = cmd.ExecuteReader();
 
                 alumno.legajo = (int)dr["legajo"];
@@ -211,11 +213,11 @@ namespace SI_ASA_DAOv1
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
 
-                cmd.Parameters.AddWithValue("id_persona", PersonaDao.add(alumnoP));
-                cmd.Parameters.AddWithValue("id_madre", PersonaDao.add(madre));
-                cmd.Parameters.AddWithValue("id_padre", PersonaDao.add(padre));
-                cmd.Parameters.AddWithValue("conoce_musica", (Boolean)alumno.conoceMusica);
-                cmd.Parameters.AddWithValue("legajo", (int)alumno.legajo);
+                cmd.Parameters.AddWithValue("@id_persona", PersonaDao.add(alumnoP));
+                cmd.Parameters.AddWithValue("@id_madre", PersonaDao.add(madre));
+                cmd.Parameters.AddWithValue("@id_padre", PersonaDao.add(padre));
+                cmd.Parameters.AddWithValue("@conoce_musica", (Boolean)alumno.conoceMusica);
+                cmd.Parameters.AddWithValue("@legajo", (int)alumno.legajo);
 
                 int idNivelEstudio = 0;
                 switch (alumno.nivelEstudio.descripcion)

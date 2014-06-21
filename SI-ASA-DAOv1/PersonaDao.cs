@@ -42,7 +42,6 @@ namespace SI_ASA_DAOv1
                 {
                     Persona persona = new Persona()
                     {
-                        //IdPersona = (int)dr["IdPersona"],
                         nombre = dr["nombre"].ToString(),
                         apellido = dr["apellido"].ToString(),
                         numDoc = (int)dr["nro_documento"],
@@ -52,9 +51,9 @@ namespace SI_ASA_DAOv1
                         celular = dr["celular"].ToString(),
                         mail = dr["mail"].ToString(),
                         fechaNacimiento = (DateTime) dr["fecha_nacimiento"]
-                    };//OJO ACÁ!! VER Q EL PASAJE DE PARAMETROS ESTÉ BIEN HECHO. POR EJ "tipoDoc"
+                    };
 
-                    listPersonas.Add(persona); //lleno la coleccion en memoria
+                    listPersonas.Add(persona); 
                 }
                 dr.Close();
                 cn.Close();
@@ -85,7 +84,7 @@ namespace SI_ASA_DAOv1
         public static Persona obtenerPersona(int id)
         {
             Persona persona = new Persona();
-            string sql = "SELECT * FROM personas p WHERE p.id = @id";
+            string sql = "SELECT * FROM personas p WHERE p.id = @idPersona";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -94,24 +93,19 @@ namespace SI_ASA_DAOv1
             {
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
+                cmd.Parameters.AddWithValue("@idPersona", id);
                 SqlDataReader dr = cmd.ExecuteReader();
-                int c = 0;
-                while (dr.Read())
-                {
-                    {
+                dr.Read();
                         persona.nombre = dr["nombre"].ToString();
                         persona.apellido = dr["apellido"].ToString();
-                        persona.numDoc = (int)dr["nro_documento"];
-                        persona.tipoDoc = TipoDocumentoDao.obtenerTipoDocumento((int)dr["id_tipo_documento"]).ElementAt(c);
+                        persona.numDoc = int.Parse(dr["nro_documento"].ToString());
+                        persona.tipoDoc = TipoDocumentoDao.obtenerTipoDocumentoPorId(int.Parse(dr["id_tipo_documento"].ToString()));
                         persona.domicilio = dr["domicilio"].ToString();
                         persona.telefono = dr["telefono"].ToString();
                         persona.celular = dr["celular"].ToString();
                         persona.mail = dr["mail"].ToString();
-                        persona.fechaNacimiento = (DateTime)dr["fecha_nacimiento"];
-                    };
-
-                    c++;
-                }
+                        persona.fechaNacimiento = DateTime.Parse(dr["fecha_nacimiento"].ToString());
+                
                 dr.Close();
                 cn.Close();
             }

@@ -12,7 +12,6 @@ public partial class Informes_grillaAlumnos : System.Web.UI.Page
     List<Alumno> listAlumno = new List<Alumno>();
     protected void Page_Load(object sender, EventArgs e)
     {
-
         listAlumno = AlumnoDao.obtenerTodo();
         grillaAlumnos.DataSource = listAlumno;
         grillaAlumnos.DataBind();

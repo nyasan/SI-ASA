@@ -29,8 +29,8 @@ namespace SI_ASA_DAOv1
                 {
                     Horario horario = new Horario()
                     {
-                        desde = (DateTime)dr["horario_inicio"],
-                        hasta = (DateTime)dr["horario_baja"]
+                        desde = dr["horario_inicio"].ToString(),
+                        hasta = dr["horario_baja"].ToString()
                     };
                     listHorarios.Add(horario); //lleno la coleccion en memoria
                 }
@@ -59,10 +59,11 @@ namespace SI_ASA_DAOv1
             {
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
+                cmd.Parameters.AddWithValue("@id", id);
                 SqlDataReader dr = cmd.ExecuteReader();
-
-                horario.desde = (DateTime)dr["horario_inicio"];
-                horario.hasta = (DateTime)dr["horario_baja"];
+                dr.Read();
+                horario.desde = dr["horario_inicio"].ToString();
+                horario.hasta = dr["horario_fin"].ToString();
 
                 dr.Close();
                 cn.Close();
@@ -76,7 +77,7 @@ namespace SI_ASA_DAOv1
             return horario;
         }
 
-        public static int obtenerID(DateTime desde, DateTime hasta)
+        public static int obtenerID(string desde, string hasta)
         {
             int id = -1;
             string sql = "SELECT * FROM horarios WHERE horario_inicio = @desde, horario_fin = @hasta";
