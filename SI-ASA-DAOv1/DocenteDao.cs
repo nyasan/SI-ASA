@@ -51,6 +51,76 @@ namespace SI_ASA_DAOv1
 
 
         }
+
+        public static List<Docente> buscarPorParametros(String nombre, String apellido, int legajo,int tipo_documento, int numero)
+        {
+            List<Docente> listDocentes = new List<Docente>();
+
+            string sql = @"SELECT        a.legajo, a.id_persona, id_horario_trabajo, salario
+                         FROM            docentes AS a INNER JOIN
+                         personas AS pA ON a.id_persona = pA.id
+                         WHERE        (1 = 1) ";
+
+            if (nombre != "")
+                sql += " AND (pA.nombre LIKE @nombre)";
+            if (apellido != "")
+                sql += " AND (pA.apellido LIKE @apellido)";
+            if (legajo != 0)
+                sql += " AND (a.legajo = @legajo)";
+            if (tipo_documento != 0 && numero != 0)
+                sql += " AND (a.tipo_documento = @tipo_documento) AND (numero = @numero)";
+
+            SqlConnection cn = new SqlConnection();
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            //PONER LA STRINGCONNECTION CORRECTA!!!
+
+            try
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand(sql, cn);
+
+                if (nombre != "")
+                    cmd.Parameters.AddWithValue("@nombre", "%" + nombre + "%");
+                if (apellido != "")
+                    cmd.Parameters.AddWithValue("@apellido", "%" + apellido + "%");
+                if (legajo != 0)
+                    cmd.Parameters.AddWithValue("@legajo", legajo);
+                if (tipo_documento != 0 && numero != 0)
+                {
+                    cmd.Parameters.AddWithValue("@tipo_documento", tipo_documento);
+                    cmd.Parameters.AddWithValue("@numero", numero);
+                }
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                int c = 0;
+                while (dr.Read())
+                {
+                    Docente docente = new Docente()
+                    {
+                        legajo = (int)dr["legajo"],
+                        docente = PersonaDao.obtenerPersona((int)(dr["id_persona"])),
+                        salario = float.Parse(dr["salario"].ToString()),
+                        horarioTrabajo = HorarioDao.obtener(int.Parse(dr["id_horario_trabajo"].ToString()))
+                    };
+
+                    listDocentes.Add(docente); //lleno la coleccion en memoria
+                    c++;
+                }
+                dr.Close();
+
+            }
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Error al buscar los Alumnos");
+            }
+            finally
+            {
+                cn.Close();
+            }
+            return listDocentes;
+
+
+        }
         public static Docente obtener(int id)
         {
             Docente docente = new Docente();
@@ -145,7 +215,7 @@ namespace SI_ASA_DAOv1
             }
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error al eliminar el Alumno");
+                throw new ApplicationException("Error al eliminar el Docente");
             }
             finally
             {
