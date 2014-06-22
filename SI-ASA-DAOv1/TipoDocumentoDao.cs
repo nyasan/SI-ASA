@@ -11,12 +11,12 @@ namespace SI_ASA_DAOv1
     public class TipoDocumentoDao
     {
         static string sql = "SELECT * FROM tipo_documento t ";
-        static SqlCommand cmd = new SqlCommand();
+        
         public static List<TipoDocumento> Obtener(string misql)
         {
 
             List<TipoDocumento> listTipoDocumento = new List<TipoDocumento>();
-                       
+            SqlCommand cmd = new SqlCommand();           
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -58,16 +58,19 @@ namespace SI_ASA_DAOv1
         
         public static List<TipoDocumento> obtenerTipoDocumento(string descripcion)
         {
+            SqlCommand cmd = new SqlCommand(); 
             cmd.Parameters.Add(new SqlParameter("@descripcion", descripcion));
             return Obtener(sql + "WHERE t.descrpcion = @descripcion");
         }
         public static List<TipoDocumento> obtenerTipoDocumento(int id)
         {
+            SqlCommand cmd = new SqlCommand(); 
             cmd.Parameters.Add(new SqlParameter("@idTipoDoc", id));
             return Obtener(sql + "WHERE t.id_tipo_documento = @idTipoDoc");
         }
         public static TipoDocumento obtenerTipoDocumentoPorId(int id)
         {
+            SqlCommand cmd = new SqlCommand(); 
             TipoDocumento tipoDoc = new TipoDocumento();
             SqlConnection cn = new SqlConnection();
             sql = "SELECT * FROM tipo_documento t WHERE t.id_tipo_documento = @idTipoDocu";
@@ -100,7 +103,6 @@ namespace SI_ASA_DAOv1
         {
             int id = -1;
             string sql = "INSERT INTO tipo_documento (descripcion) VALUES (@descripcion)";
-            
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
 

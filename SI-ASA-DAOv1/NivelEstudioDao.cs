@@ -14,7 +14,7 @@ namespace SI_ASA_DAOv1
         {
             NivelEstudio nivelEstudio = new NivelEstudio();
 
-            string sql = "SELECT * FROM nivel_estudio n WHERE n.id = @id";
+            string sql = "SELECT * FROM nivel_estudio WHERE id = @id";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
@@ -23,6 +23,7 @@ namespace SI_ASA_DAOv1
             {
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
+                cmd.Parameters.AddWithValue("@id", id);
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
