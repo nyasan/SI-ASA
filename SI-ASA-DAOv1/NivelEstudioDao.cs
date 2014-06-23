@@ -25,12 +25,8 @@ namespace SI_ASA_DAOv1
                 SqlCommand cmd = new SqlCommand(sql, cn);
                 cmd.Parameters.AddWithValue("@id", id);
                 SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    {
-                        nivelEstudio.descripcion = dr["descripcion"].ToString();
-                    };
-                }
+                dr.Read();
+                nivelEstudio.descripcion = dr["descripcion"].ToString();
                 dr.Close();
                 cn.Close();
             }

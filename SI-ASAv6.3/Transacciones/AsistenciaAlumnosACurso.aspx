@@ -15,8 +15,8 @@
         onselectedindexchanged="gv_grillaAlumnos_SelectedIndexChanged">
         <Columns>
             <asp:BoundField DataField="legajo" HeaderText="Legajo" />
-            <asp:BoundField DataField="nombre" HeaderText="Nombre" />
-            <asp:BoundField DataField="apellido" HeaderText="Apellido" />
+            <asp:BoundField DataField="alumno.nombre" HeaderText="Nombre" />
+            <asp:BoundField DataField="alumno.apellido" HeaderText="Apellido" />
         </Columns>
     </asp:GridView>
     <br />

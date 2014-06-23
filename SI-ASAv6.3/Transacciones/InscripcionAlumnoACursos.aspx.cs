@@ -49,4 +49,9 @@ public partial class Transacciones_InscripcionAlumnoACursos : System.Web.UI.Page
         if(gv_busqueda.SelectedRow != null || idCursos.Count > 0)
             AlumnosxCursoDao.registrarCursadoAlumno(AlumnoDao.obtenerPorLegajo(int.Parse(gv_busqueda.SelectedRow.Cells[1].Text)), idCursos, DateTime.Now);
     }
+    protected void gv_busqueda_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //IMPLEMENTAR: si se selecciona uno, se deselecciona el anterior. No pueden haber mas de dos alumnos seleccionados.
+        Alumno alumno = new Alumno();
+    }
 }

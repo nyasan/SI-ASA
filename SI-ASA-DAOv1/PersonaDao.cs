@@ -124,7 +124,7 @@ namespace SI_ASA_DAOv1
             int i = 0;
 
             String sql = @"INSERT INTO personas
-                         (nombre, apellido, nro_documento, telefono, id_tipo_documento, celular, mail, fecha_nacimiento, domiclio)
+                         (nombre, apellido, nro_documento, telefono, id_tipo_documento, celular, mail, fecha_nacimiento, domicilio)
                          VALUES        (@nombre,@apellido,@nro_documento,@telefono,@id_tipo_documento,@celular,@mail,@fecha_nacimiento,@domicilio)";
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";

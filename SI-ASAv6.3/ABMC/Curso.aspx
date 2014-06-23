@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <fieldset class="Datos"><legend>Curso</legend>
         <label>ID Curso</label>
-        <asp:Label ID="lbl_IdCurso" runat="server"></asp:Label><br />
+        <asp:TextBox ID="txt_IDCurso" runat="server" Enabled="False"></asp:TextBox><br />
 
         <label>Nombre</label>
         <asp:TextBox ID="txt_nombre" runat="server"></asp:TextBox><br />
@@ -22,8 +22,10 @@
         <label id="descripcion_curso">Descripción</label>
         <asp:TextBox ID="txt_Descripcion" runat="server" TextMode="MultiLine"></asp:TextBox><br /><br />
         
-        <asp:Button ID="btn_Eliminar" runat="server" Text="Eliminar" />
-        <asp:Button ID="btn_Guardar" runat="server" Text="Guardar" />
+        <asp:Button ID="btn_Eliminar" runat="server" Text="Eliminar" 
+            onclick="btn_Eliminar_Click" />
+        <asp:Button ID="btn_Guardar" runat="server" Text="Guardar" 
+            onclick="btn_Guardar_Click" />
     </fieldset>
 </asp:Content>
 

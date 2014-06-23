@@ -37,7 +37,7 @@ public partial class Transacciones_InscripcionDocenteACursos : System.Web.UI.Pag
 
     protected void cargarGrilla()
     {
-        gv_busqueda.DataSource = AlumnoDao.obtenerTodo();
+        gv_busqueda.DataSource = DocenteDao.obtenerTodo();
         gv_busqueda.DataKeyNames = new string[] { "legajo" };
         gv_busqueda.DataBind();
     }

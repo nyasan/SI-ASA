@@ -26,23 +26,20 @@ namespace SI_ASA_DAOv1
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
                 SqlDataReader dr = cmd.ExecuteReader();
-                int c = 0;
                 while (dr.Read())
                 {
                     Alumno alumno = new Alumno()
                     {
+                        alumno = PersonaDao.obtenerPersona((int)(dr["id_persona"])),
                         legajo = (int)dr["legajo"],
                         conoceMusica = (Boolean)dr["conoce_musica"],
                         madre = PersonaDao.obtenerPersona((int)(dr["id_madre"])),
                         padre = PersonaDao.obtenerPersona((int)(dr["id_padre"])),
                         nivelEstudio = NivelEstudioDao.obtener((int)(dr["id_nivel_estudio"]))
                     };
-
-                    listAlumnos.Add(alumno); //lleno la coleccion en memoria
-                    c++;
+                    listAlumnos.Add(alumno);
                 }
                 dr.Close();
-
             }
             catch (SqlException ex)
             {
@@ -139,21 +136,24 @@ namespace SI_ASA_DAOv1
                 SqlCommand cmd = new SqlCommand(sql, cn);
                 cmd.Parameters.AddWithValue("@idPersona", id);
                 SqlDataReader dr = cmd.ExecuteReader();
-               
+
                 alumno.legajo = (int)dr["legajo"];
                 alumno.conoceMusica = (Boolean)dr["conoce_musica"];
                 alumno.madre = PersonaDao.obtenerPersona((int)(dr["id_madre"]));
                 alumno.padre = PersonaDao.obtenerPersona((int)(dr["id_padre"]));
                 alumno.nivelEstudio = NivelEstudioDao.obtener((int)(dr["id_nivel_estudio"]));
-                
+
                 dr.Close();
                 cn.Close();
             }
             catch (SqlException ex)
             {
+                throw new ApplicationException("Error al buscar al Alumno");
+            }
+            finally
+            {
                 if (cn.State == ConnectionState.Open)
                     cn.Close();
-                throw new ApplicationException("Error al buscar al Alumno");
             }
             return alumno;
         }
@@ -161,7 +161,7 @@ namespace SI_ASA_DAOv1
         public static Alumno obtenerPorLegajo(int legajo)
         {
             Alumno alumno = new Alumno();
-            string sql = @"SELECT        a.legajo, a.id_persona, a.id_madre, a.id_padre, a.conoce_musica, a.id_nivel_estudio, pA.id, pA.nombre, pA.apellido, pA.nro_documento, pA.domiclio, pA.telefono, pA.id_tipo_documento, pA.celular, pA.mail, 
+            string sql = @"SELECT        a.legajo, a.id_persona, a.id_madre, a.id_padre, a.conoce_musica, a.id_nivel_estudio, pA.id, pA.nombre, pA.apellido, pA.nro_documento, pA.domicilio, pA.telefono, pA.id_tipo_documento, pA.celular, pA.mail, 
                          pA.fecha_nacimiento
                          FROM            alumnos AS a INNER JOIN
                          personas AS pA ON a.id_persona = pA.id
@@ -177,7 +177,17 @@ namespace SI_ASA_DAOv1
                 SqlCommand cmd = new SqlCommand(sql, cn);
                 cmd.Parameters.AddWithValue("@legajo", legajo);
                 SqlDataReader dr = cmd.ExecuteReader();
+                dr.Read();
 
+                //alumno.legajo = (int)dr["legajo"];
+                //alumno.legajo = legajo;
+                //alumno.alumno = PersonaDao.obtenerPersona(int.Parse(dr["id_persona"].ToString()));
+                //alumno.conoceMusica = Boolean.Parse(dr["conoce_musica"].ToString());
+                //alumno.madre = PersonaDao.obtenerPersona(int.Parse(dr["id_madre"].ToString()));
+                //alumno.padre = PersonaDao.obtenerPersona(int.Parse(dr["id_padre"].ToString()));
+                //alumno.nivelEstudio = NivelEstudioDao.obtener(int.Parse(dr["id_nivel_estudio"].ToString()));
+
+                alumno.alumno = PersonaDao.obtenerPersona((int)(dr["id_persona"]));
                 alumno.legajo = (int)dr["legajo"];
                 alumno.conoceMusica = (Boolean)dr["conoce_musica"];
                 alumno.madre = PersonaDao.obtenerPersona((int)(dr["id_madre"]));
@@ -192,7 +202,8 @@ namespace SI_ASA_DAOv1
             }
             finally
             {
-                cn.Close();
+                if (cn.State == ConnectionState.Open)
+                    cn.Close();
             }
 
             return alumno;
@@ -437,7 +448,6 @@ namespace SI_ASA_DAOv1
                 sql += " AND (a.numero = @numero) AND (a.tipo_documento = @tipo_documento)";
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
-            //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
             {
@@ -485,7 +495,35 @@ namespace SI_ASA_DAOv1
                 cn.Close();
             }
             return listAlumnos;
+        }
 
+        public static int MaxLegajo()
+        {
+            int i = 0;
+
+            string sql = @"SELECT        MAX(legajo) AS Expr1
+                         FROM            alumnos";
+
+            SqlConnection cn = new SqlConnection();
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+
+            try
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand(sql, cn);
+                i = (int) cmd.ExecuteScalar();
+            }
+
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Error al buscar los Alumnos");
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+            return i+1;
         }
 
     }

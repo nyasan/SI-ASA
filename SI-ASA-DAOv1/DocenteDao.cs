@@ -14,7 +14,7 @@ namespace SI_ASA_DAOv1
         {
             List<Docente> listDocentes = new List<Docente>();
 
-            string sql = @"SELECT        d.legajo, d.id_persona, d.id_horario_trabajo, d.salario, p.id, p.nombre, p.apellido, p.nro_documento, p.domiclio, p.telefono, p.id_tipo_documento, p.celular, p.mail, p.fecha_nacimiento
+            string sql = @"SELECT        d.legajo, d.id_persona, d.id_horario_trabajo, d.salario, p.id, p.nombre, p.apellido, p.nro_documento, p.domicilio, p.telefono, p.id_tipo_documento, p.celular, p.mail, p.fecha_nacimiento
                          FROM            docentes AS d INNER JOIN
                          personas AS p ON d.id_persona = p.id";
 
@@ -92,7 +92,6 @@ namespace SI_ASA_DAOv1
                 }
 
                 SqlDataReader dr = cmd.ExecuteReader();
-                int c = 0;
                 while (dr.Read())
                 {
                     Docente docente = new Docente()
@@ -102,23 +101,19 @@ namespace SI_ASA_DAOv1
                         salario = float.Parse(dr["salario"].ToString()),
                         horarioTrabajo = HorarioDao.obtener(int.Parse(dr["id_horario_trabajo"].ToString()))
                     };
-
-                    listDocentes.Add(docente); //lleno la coleccion en memoria
-                    c++;
                 }
                 dr.Close();
 
             }
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error al buscar los Alumnos");
+                throw new ApplicationException("Error al buscar los Docentes");
             }
             finally
             {
                 cn.Close();
             }
             return listDocentes;
-
 
         }
         public static Docente obtener(int id)
@@ -294,6 +289,35 @@ namespace SI_ASA_DAOv1
                 throw new ApplicationException("Error al buscar el Docente");
             }
             return docente;
+        }
+
+        public static int MaxLegajo()
+        {
+            int i = 0;
+
+            string sql = @"SELECT        MAX(legajo) AS Expr1
+                         FROM            docentes";
+
+            SqlConnection cn = new SqlConnection();
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+
+            try
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand(sql, cn);
+                i = (int)cmd.ExecuteScalar();
+            }
+
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Error al buscar los Docentes");
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+            return i + 1;
         }
     }
 }

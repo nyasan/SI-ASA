@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <fieldset><legend>Inscripcion de Docentes</legend>
     
-    <label>Buscar docentes y seleccionar uno</label><br />
+    <label>-Buscar docentes y seleccionar uno-</label><br />
     <fieldset><legend>Busqueda</legend>
         <label>Tipo de Documento</label>
         <asp:DropDownList ID="ddl_tipoDoc" runat="server"></asp:DropDownList><br />
@@ -19,21 +19,23 @@
         <asp:TextBox ID="txt_legajo" runat="server"></asp:TextBox><br /><br />
         <asp:Button ID="btn_Buscar" runat="server" Text="Buscar" />
         <br /><br />
+        </fieldset>
         <asp:GridView ID="gv_busqueda" runat="server" AutoGenerateColumns="False">
         
         <Columns>
             <asp:BoundField HeaderText="Legajo" DataField="legajo" />
-            <asp:BoundField HeaderText="Nombre" DataField="nombre" />
-            <asp:BoundField HeaderText="Apellido" DataField="apellido" />
-            <asp:BoundField HeaderText="Tipo Documento" DataField="descripcion" />
-            <asp:BoundField HeaderText="Número Documento" DataField="numDoc" />
+            <asp:BoundField HeaderText="Nombre" DataField="docente.nombre" />
+            <asp:BoundField HeaderText="Apellido" DataField="docente.apellido" />
+            <asp:BoundField HeaderText="Tipo Documento" 
+                DataField="docente.tipoDoc.descripcion" />
+            <asp:BoundField HeaderText="Número Documento" DataField="docente.numDoc" />
         </Columns>
     </asp:GridView>
-    </fieldset>
 
     <legend>Cursos</legend>
     <br />
-    <label>Seleccionar los cursos en donde el docente dara clases</label><br />
+    <label>-Seleccionar los cursos en donde el docente dara clases-</label><br />
+    <br />
     <label>Cursos</label>
     <asp:ListBox ID="list_cursos" runat="server" 
             onselectedindexchanged="list_cursos_SelectedIndexChanged"></asp:ListBox>

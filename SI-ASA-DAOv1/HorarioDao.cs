@@ -8,7 +8,7 @@ using System.Data;
 
 namespace SI_ASA_DAOv1
 {
-    class HorarioDao
+    public class HorarioDao
     {
         public static List<Horario> obtenerTodo()
         {

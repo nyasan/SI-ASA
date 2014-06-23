@@ -41,7 +41,9 @@ public partial class Informes_grillaAlumnos : System.Web.UI.Page
 
     protected void gv_busqueda_SelectedIndexChanged(object sender, EventArgs e)
     {
-        
+        Alumno alumno = AlumnoDao.obtenerPorLegajo(int.Parse(gv_busqueda.SelectedRow.Cells[1].Text));
+        Session ["legajo"] = alumno.legajo;
+        Session["origen"] = "consulta";
         Response.Redirect("Alumno.aspx");
     }
 }

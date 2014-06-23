@@ -17,6 +17,7 @@ public partial class grillaCurso : System.Web.UI.Page
         grillaCursos.DataSource = listCurso;
         grillaCursos.DataBind();
     }
+
     protected void btnBuscar_Click(object sender, EventArgs e)
     {
         if (txtNombre.Text == "")
@@ -27,5 +28,7 @@ public partial class grillaCurso : System.Web.UI.Page
             grillaCursos.DataSource = listCurso;
             grillaCursos.DataBind();
         }
+        txtNombre.Text = "";
+        txtNombre.Focus();
     }
 }

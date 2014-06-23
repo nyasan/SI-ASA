@@ -16,6 +16,11 @@ public partial class ABMC_Alumno : System.Web.UI.Page
         cargarCombo(ddl_TipoDocPadre, 1);
         cargarCombo(ddl_NivelEstudio, 0);
 
+        txt_legajo.Text = AlumnoDao.MaxLegajo().ToString();
+
+        //TENGO QUE PODER SABER DE DONDE VIENE PARA DETECTAR EL ESTADO!!
+        Session["origen"] = "desconocido";
+
         //VALIDAR QUE SE INGRESAN UNICAMENTE NUMEROS
         txt_NumDoc.Attributes.Add("onkeypress", "javascript:return SoloNum(event); ");
         txt_NumDocMadre.Attributes.Add("onkeypress", "javascript:return SoloNum(event); ");
@@ -27,6 +32,56 @@ public partial class ABMC_Alumno : System.Web.UI.Page
 
         if (!IsPostBack)
         {
+            string origen = Session["origen"].ToString();
+            if (origen.Equals("consulta"))
+            {
+                Alumno alumnoConsulta = AlumnoDao.obtenerPorLegajo(int.Parse(Session["legajo"].ToString()));
+
+                txt_legajo.Text = alumnoConsulta.legajo.ToString();
+                txt_Nombre.Text = alumnoConsulta.alumno.nombre.ToString();
+                txt_Apellido.Text = alumnoConsulta.alumno.apellido.ToString();
+                ddl_TipoDoc.SelectedValue = alumnoConsulta.alumno.tipoDoc.descripcion.ToString();
+                txt_NumDoc.Text = alumnoConsulta.alumno.numDoc.ToString();
+                txt_Domicilio.Text = alumnoConsulta.alumno.domicilio.ToString();
+                txt_Telefono.Text = alumnoConsulta.alumno.telefono.ToString();
+                txt_Celular.Text = alumnoConsulta.alumno.celular.ToString();
+                txt_mail.Text = alumnoConsulta.alumno.mail.ToString();
+                txt_FechaNacimiento.Text = alumnoConsulta.alumno.fechaNacimiento.ToString();
+
+                if (alumnoConsulta.conoceMusica == true)
+                {
+                    opt_Si.Checked = true;
+                    opt_No.Checked = false;
+                }
+                else
+                {
+                    opt_No.Checked = true;
+                    opt_Si.Checked = false;
+                }
+                ddl_NivelEstudio.SelectedValue = alumnoConsulta.nivelEstudio.ToString();
+
+                txt_NombreMadre.Text = alumnoConsulta.madre.nombre.ToString();
+                txt_ApellidoMadre.Text = alumnoConsulta.madre.apellido.ToString();
+                ddl_TipoDocMadre.SelectedItem.Value = alumnoConsulta.madre.tipoDoc.descripcion.ToString();
+                txt_NumDocMadre.Text = alumnoConsulta.madre.numDoc.ToString();
+                txt_DomicilioMadre.Text = alumnoConsulta.madre.domicilio.ToString();
+                txt_TelefonoMadre.Text = alumnoConsulta.madre.telefono.ToString();
+                txt_CelularMadre.Text = alumnoConsulta.madre.celular.ToString();
+                txt_MailMadre.Text = alumnoConsulta.madre.mail.ToString();
+                txt_FechaNacimientoMadre.Text = alumnoConsulta.madre.fechaNacimiento.ToString();
+
+                txt_NombrePadre.Text = alumnoConsulta.padre.nombre.ToString();
+                txt_ApellidoPadre.Text = alumnoConsulta.padre.apellido.ToString();
+                ddl_TipoDocPadre.SelectedItem.Value = alumnoConsulta.padre.tipoDoc.descripcion.ToString();
+                txt_NumDocPadre.Text = alumnoConsulta.padre.numDoc.ToString();
+                txt_DomicilioPadre.Text = alumnoConsulta.padre.domicilio.ToString();
+                txt_TelefonoPadre.Text = alumnoConsulta.padre.telefono.ToString();
+                txt_CelularPadre.Text = alumnoConsulta.padre.celular.ToString();
+                txt_MailPadre.Text = alumnoConsulta.padre.mail.ToString();
+                txt_FechaNacimientoPadre.Text = alumnoConsulta.padre.fechaNacimiento.ToString();
+
+                Session["origen"] = "desconocido";
+            }
         }
     }
 

@@ -30,12 +30,13 @@
                 </asp:LoginView>
             </div>
             <div class="clear hideSkiplink">
-                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" 
+                    EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
                         <asp:MenuItem NavigateUrl="~/Account/Login.aspx" Text="Inicio" Value="Inicio"/>
                         <asp:MenuItem NavigateUrl="~/Pestañas/Alumnos.aspx" Text="Alumnos" 
                             Value="Alumnos">
-                            <asp:MenuItem NavigateUrl="~/ABMC/Alumno.aspx" Text="Nuevo " Value="Nuevo ">
+                            <asp:MenuItem NavigateUrl="~/ABMC/Alumno.aspx" Text="Nuevo " Value="Nuevo">
                             </asp:MenuItem>
                             <asp:MenuItem NavigateUrl="~/ABMC/Alumno.aspx" Text="Eliminar" Value="Eliminar">
                             </asp:MenuItem>

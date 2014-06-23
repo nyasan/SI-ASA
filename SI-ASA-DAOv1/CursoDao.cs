@@ -76,8 +76,9 @@ namespace SI_ASA_DAOv1
                     {
                         nombre = dr["nombre"].ToString(),
                         descripcion = dr["descripcion"].ToString(),
-                        hora_desde = dr["horario_inicio"].ToString(),
-                        hora_hasta = dr["horario_fin"].ToString()
+                        horario = HorarioDao.obtener((int)dr["id_horario"]),
+                        //hora_desde = dr["horario_inicio"].ToString(),
+                        //hora_hasta = dr["horario_fin"].ToString()
                     };
                     listCursos.Add(curso); //lleno la coleccion en memoria
                 }
@@ -118,8 +119,9 @@ namespace SI_ASA_DAOv1
                         id_curso = int.Parse(dr["id_curso"].ToString()),
                         nombre = dr["nombre"].ToString(),
                         descripcion = dr["descripcion"].ToString(),
-                        hora_desde = dr["horario_inicio"].ToString(),
-                        hora_hasta = dr["horario_fin"].ToString()
+                        horario = HorarioDao.obtener((int)dr["id_horario"]),
+                        //hora_desde = dr["horario_inicio"].ToString(),
+                        //hora_hasta = dr["horario_fin"].ToString()
                     };
                     listCursos.Add(curso); //lleno la coleccion en memoria
                 }
@@ -228,8 +230,9 @@ namespace SI_ASA_DAOv1
                 dr.Read();
                 curso.nombre = dr["nombre"].ToString();
                 curso.descripcion = dr["descripcion"].ToString();
-                curso.hora_desde = dr["horario_inicio"].ToString();
-                curso.hora_hasta = dr["horario_fin"].ToString();
+                curso.horario = HorarioDao.obtener((int)dr["id_horario"]);
+                //curso.hora_desde = dr["horario_inicio"].ToString();
+                //curso.hora_hasta = dr["horario_fin"].ToString();
 
                 dr.Close();
             }
@@ -244,6 +247,35 @@ namespace SI_ASA_DAOv1
                     cn.Close();
             }
             return curso;
+        }
+
+        public static int MaxId()
+        {
+            int i = 0;
+
+            string sql = @"SELECT        MAX(id_curso) AS Expr1
+                         FROM            cursos";
+
+            SqlConnection cn = new SqlConnection();
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+
+            try
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand(sql, cn);
+                i = (int)cmd.ExecuteScalar();
+            }
+
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Error al buscar los Alumnos");
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+            return i + 1;
         }
     }
 }

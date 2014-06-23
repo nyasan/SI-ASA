@@ -9,14 +9,15 @@
 <fieldset class="Datos"><legend>Docente</legend>
     <fieldset><legend>Datos del Docente</legend>
         <label>Legajo: </label>
-        <asp:Label ID="lbl_legajo" runat="server" Text=""></asp:Label><br />
+        <asp:TextBox ID="txt_legajo" runat="server" Enabled="False"></asp:TextBox><br />
         
         <fieldset> <legend>Horarios de Trabajo</legend><br />
             <label>Desde: </label><asp:TextBox ID="txt_horaDesde" runat="server"></asp:TextBox><br />
             <label>Hasta: </label><asp:TextBox ID="txt_horaHasta" runat="server"></asp:TextBox><br />
         </fieldset>
         
-        <label>Salario: </label><asp:Label ID="Label1" runat="server" Text=""></asp:Label><br />
+        <label>Salario: </label>
+        <asp:TextBox ID="txt_salario" runat="server"></asp:TextBox><br />
     </fieldset>
 
     <fieldset><legend>Datos Personales</legend>
@@ -49,8 +50,10 @@
 
         </fieldset>
 
-        <asp:Button ID="btn_Eliminar" runat="server" Text="Eliminar" />
-        <asp:Button ID="btn_Guardar" runat="server" Text="Guardar" />
+        <asp:Button ID="btn_Eliminar" runat="server" Text="Eliminar" 
+        onclick="btn_Eliminar_Click" />
+        <asp:Button ID="btn_Guardar" runat="server" Text="Guardar" 
+        onclick="btn_Guardar_Click" />
 
         </fieldset>
 </asp:Content>
