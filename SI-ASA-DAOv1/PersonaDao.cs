@@ -36,8 +36,9 @@ namespace SI_ASA_DAOv1
             {
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
+                cmd.Parameters.AddWithValue("@tipoDocu", tipoDoc.descripcion);
+                cmd.Parameters.AddWithValue("@numDoc", numDoc);
                 SqlDataReader dr = cmd.ExecuteReader();
-                int c = 0;
                 while (dr.Read())
                 {
                     Persona persona = new Persona()
@@ -45,7 +46,7 @@ namespace SI_ASA_DAOv1
                         nombre = dr["nombre"].ToString(),
                         apellido = dr["apellido"].ToString(),
                         numDoc = (int)dr["nro_documento"],
-                        tipoDoc = TipoDocumentoDao.obtenerTipoDocumento((int)dr["id_tipo_documento"]).ElementAt(c),
+                        tipoDoc = TipoDocumentoDao.obtenerTipoDocumento((int)dr["id_tipo_documento"]),
                         domicilio = dr["domicilio"].ToString(),
                         telefono = dr["telefono"].ToString(),
                         celular = dr["celular"].ToString(),
@@ -135,25 +136,28 @@ namespace SI_ASA_DAOv1
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
 
-                cmd.Parameters.AddWithValue("nombre", persona.nombre.ToString());
-                cmd.Parameters.AddWithValue("apellido", persona.apellido.ToString());
-                cmd.Parameters.AddWithValue("nro_documento", (int)persona.numDoc);
-                cmd.Parameters.AddWithValue("domicilio", persona.domicilio.ToString());
-                cmd.Parameters.AddWithValue("telefono", persona.telefono.ToString());
+                cmd.Parameters.AddWithValue("@nombre", persona.nombre.ToString());
+                cmd.Parameters.AddWithValue("@apellido", persona.apellido.ToString());
+                cmd.Parameters.AddWithValue("@nro_documento", (int)persona.numDoc);
+                cmd.Parameters.AddWithValue("@domicilio", persona.domicilio.ToString());
+                cmd.Parameters.AddWithValue("@telefono", persona.telefono.ToString());
                 int idDoc=0;
                 switch(persona.tipoDoc.descripcion)
                 {
-                    case "DNI": idDoc = 1;
+                    case "DNI": 
+                        idDoc = 1;
                         break;
-                    case "LE": idDoc = 2;
+                    case "LE": 
+                        idDoc = 2;
                         break;
-                    case "LC": idDoc = 3;
+                    case "LC": 
+                        idDoc = 3;
                         break;
                 }
-                cmd.Parameters.AddWithValue("id_tipo_documento", (int)idDoc);
-                cmd.Parameters.AddWithValue("celular", persona.celular.ToString());
-                cmd.Parameters.AddWithValue("mail", persona.mail.ToString());
-                cmd.Parameters.AddWithValue("fecha_nacimiento", (DateTime)persona.fechaNacimiento);
+                cmd.Parameters.AddWithValue("@id_tipo_documento", idDoc);
+                cmd.Parameters.AddWithValue("@celular", persona.celular.ToString());
+                cmd.Parameters.AddWithValue("@mail", persona.mail.ToString());
+                cmd.Parameters.AddWithValue("@fecha_nacimiento", (DateTime)persona.fechaNacimiento);
 
                 i = (int) cmd.ExecuteScalar();
                 cn.Close();
@@ -194,8 +198,8 @@ namespace SI_ASA_DAOv1
                         break;
                 }
 
-                cmd.Parameters.AddWithValue("nro_documento", persona.numDoc);
-                cmd.Parameters.AddWithValue("id_tipo_documento", idDoc);
+                cmd.Parameters.AddWithValue("@nro_documento", persona.numDoc);
+                cmd.Parameters.AddWithValue("@id_tipo_documento", idDoc);
 
                 i = (int)cmd.ExecuteScalar();
             }
@@ -250,25 +254,25 @@ namespace SI_ASA_DAOv1
                         break;
                 }
 
-                cmd.Parameters.AddWithValue("nombre_nuevo", personaNueva.nombre.ToString());
-                cmd.Parameters.AddWithValue("apellido_nuevo", personaNueva.apellido.ToString());
-                cmd.Parameters.AddWithValue("nro_documento_nuevo", (int)personaNueva.numDoc);
-                cmd.Parameters.AddWithValue("domicilio_nuevo", personaNueva.domicilio.ToString());
-                cmd.Parameters.AddWithValue("telefono_nuevo", personaNueva.telefono.ToString());
-                cmd.Parameters.AddWithValue("id_tipo_documento_nuevo", idTDNuevo);
-                cmd.Parameters.AddWithValue("celular_nuevo", personaNueva.celular.ToString());
-                cmd.Parameters.AddWithValue("mail_nuevo", personaNueva.mail.ToString());
-                cmd.Parameters.AddWithValue("fecha_nacimiento_nuevo", (DateTime)personaNueva.fechaNacimiento);
+                cmd.Parameters.AddWithValue("@nombre_nuevo", personaNueva.nombre.ToString());
+                cmd.Parameters.AddWithValue("@apellido_nuevo", personaNueva.apellido.ToString());
+                cmd.Parameters.AddWithValue("@nro_documento_nuevo", (int)personaNueva.numDoc);
+                cmd.Parameters.AddWithValue("@domicilio_nuevo", personaNueva.domicilio.ToString());
+                cmd.Parameters.AddWithValue("@telefono_nuevo", personaNueva.telefono.ToString());
+                cmd.Parameters.AddWithValue("@id_tipo_documento_nuevo", idTDNuevo);
+                cmd.Parameters.AddWithValue("@celular_nuevo", personaNueva.celular.ToString());
+                cmd.Parameters.AddWithValue("@mail_nuevo", personaNueva.mail.ToString());
+                cmd.Parameters.AddWithValue("@fecha_nacimiento_nuevo", (DateTime)personaNueva.fechaNacimiento);
 
-                cmd.Parameters.AddWithValue("nombre", personaVieja.nombre.ToString());
-                cmd.Parameters.AddWithValue("apellido", personaVieja.apellido.ToString());
-                cmd.Parameters.AddWithValue("nro_documento", (int)personaVieja.numDoc);
-                cmd.Parameters.AddWithValue("domicilio", personaVieja.domicilio.ToString());
-                cmd.Parameters.AddWithValue("telefono", personaVieja.telefono.ToString());
-                cmd.Parameters.AddWithValue("id_tipo_documento", idTDViejo);
-                cmd.Parameters.AddWithValue("celular", personaVieja.celular.ToString());
-                cmd.Parameters.AddWithValue("mail", personaVieja.mail.ToString());
-                cmd.Parameters.AddWithValue("fecha_nacimiento", (DateTime)personaVieja.fechaNacimiento);
+                cmd.Parameters.AddWithValue("@nombre", personaVieja.nombre.ToString());
+                cmd.Parameters.AddWithValue("@apellido", personaVieja.apellido.ToString());
+                cmd.Parameters.AddWithValue("@nro_documento", (int)personaVieja.numDoc);
+                cmd.Parameters.AddWithValue("@domicilio", personaVieja.domicilio.ToString());
+                cmd.Parameters.AddWithValue("@telefono", personaVieja.telefono.ToString());
+                cmd.Parameters.AddWithValue("@id_tipo_documento", idTDViejo);
+                cmd.Parameters.AddWithValue("@celular", personaVieja.celular.ToString());
+                cmd.Parameters.AddWithValue("@mail", personaVieja.mail.ToString());
+                cmd.Parameters.AddWithValue("@fecha_nacimiento", (DateTime)personaVieja.fechaNacimiento);
 
                 i = (int)cmd.ExecuteScalar();
             }
@@ -297,7 +301,8 @@ namespace SI_ASA_DAOv1
             {
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
-                SqlDataReader dr = cmd.ExecuteReader();
+
+                cmd.Parameters.AddWithValue("@nro_documento", numDoc);
 
                 int idDoc = 0;
                 switch (descripcionTipoDoc)
@@ -310,12 +315,15 @@ namespace SI_ASA_DAOv1
                         break;
                 }
 
+                cmd.Parameters.AddWithValue("@id_tipo_documento", idDoc);
+
+                SqlDataReader dr = cmd.ExecuteReader();
                 persona.nombre = dr["nombre"].ToString();
                 persona.apellido = dr["apellido"].ToString();
                 persona.numDoc = numDoc;
                 persona.domicilio = dr["domicilio"].ToString();
                 persona.telefono = dr["telefono"].ToString();
-                persona.tipoDoc = TipoDocumentoDao.obtenerTipoDocumento(idDoc).ElementAt(1);
+                persona.tipoDoc = TipoDocumentoDao.obtenerTipoDocumento(idDoc);
 
                 dr.Close();
             }

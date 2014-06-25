@@ -9,7 +9,7 @@ using SI_ASA_ENTIDADESv1;
 
 public partial class Transacciones_AsistenciaAlumnosACurso : System.Web.UI.Page
 {
-    protected LinkedList<Alumno> alumnos;
+    protected List<Alumno> alumnos;
     protected void Page_Load(object sender, EventArgs e)
     {
         cargarCombos(ddl_Curso);
@@ -41,8 +41,10 @@ public partial class Transacciones_AsistenciaAlumnosACurso : System.Web.UI.Page
     }
     protected void gv_grillaAlumnos_SelectedIndexChanged(object sender, EventArgs e)
     {
-        Alumno alumno = AlumnoDao.obtenerPorLegajo(int.Parse(gv_grillaAlumnos.SelectedRow.Cells[1].Text));
-        alumnos.AddLast(alumno);
+        Alumno alumno = new Alumno();
+        alumno = AlumnoDao.obtenerPorLegajo(int.Parse(gv_grillaAlumnos.SelectedRow.Cells[1].Text));
+        if (alumno != null)
+            alumnos.Add(alumno);
     }
     
 }

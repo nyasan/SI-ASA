@@ -37,9 +37,9 @@ namespace SI_ASA_DAOv1
 
                 SqlCommand cmd = new SqlCommand(sqlCurso, cn);
 
-                cmd.Parameters.AddWithValue("nombre", curso.nombre);
-                cmd.Parameters.AddWithValue("descripcion", curso.descripcion);
-                cmd.Parameters.AddWithValue("id_horario", HorarioDao.add(horarioTrabajo));
+                cmd.Parameters.AddWithValue("@nombre", curso.nombre);
+                cmd.Parameters.AddWithValue("@descripcion", curso.descripcion);
+                cmd.Parameters.AddWithValue("@id_horario", HorarioDao.add(horarioTrabajo));
 
                 cmd.ExecuteNonQuery();
 

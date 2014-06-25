@@ -10,7 +10,7 @@ namespace SI_ASA_DAOv1
 {
     public class falta_alumno_x_cursoDao
     {
-        public static void registrarAsistencia(LinkedList<Alumno> listAlumnos, int idCurso, DateTime fechaAsistencia)
+        public static void registrarAsistencia(List<Alumno> listAlumnos, int idCurso, DateTime fechaAsistencia)
         {
             int i = -1;
             String sql = @"INSERT INTO falta_alumno_x_curso

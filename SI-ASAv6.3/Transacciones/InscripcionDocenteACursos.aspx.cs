@@ -22,7 +22,6 @@ public partial class Transacciones_InscripcionDocenteACursos : System.Web.UI.Pag
         lista.DataValueField = "id_curso";
         lista.DataTextField = "nombre";
         lista.DataBind();
-        lista.Items.Insert(0, new ListItem("Elija una opción...", "0"));
     }
 
     protected void cargarCombo(DropDownList ddl)
@@ -50,5 +49,28 @@ public partial class Transacciones_InscripcionDocenteACursos : System.Web.UI.Pag
     {
         if (gv_busqueda.SelectedRow != null || idCursos.Count > 0)
             Docente_x_cursoDao.registrarCursadoDocente(DocenteDao.obtenerPorLegajo(int.Parse(gv_busqueda.SelectedRow.Cells[1].Text)), idCursos, DateTime.Now);
+    }
+    protected void btn_Buscar_Click(object sender, EventArgs e)
+    {
+        int numDoc = 0;
+        int legajo = 0;
+        if (txt_numeroDoc.Text != "")
+            numDoc = int.Parse(txt_numeroDoc.Text);
+        if (txt_legajo.Text != "")
+            legajo = int.Parse(txt_legajo.Text);
+        gv_busqueda.DataSource = DocenteDao.buscarPorParametros(txt_nombre.Text, txt_apellido.Text, legajo, numDoc, ddl_tipoDoc.SelectedIndex);
+        gv_busqueda.DataKeyNames = new string[] { "legajo" };
+        gv_busqueda.DataBind();
+
+        txt_apellido.Text = "";
+        txt_legajo.Text = "";
+        txt_nombre.Text = "";
+        txt_numeroDoc.Text = "";
+        ddl_tipoDoc.Focus();
+    }
+    protected void gv_busqueda_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //Se debe incorporar una funcionalidad de manera que se des-seleccione la selección anterior 
+        //ya que se inscribe un UNICO docente a VARIOS cursos
     }
 }

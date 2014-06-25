@@ -35,4 +35,22 @@ public partial class grillaDocentes : System.Web.UI.Page
         Session["origen"] = "consulta";
         Response.Redirect("Docente.aspx");
     }
+    protected void btn_Buscar_Click(object sender, EventArgs e)
+    {
+        int numDoc = 0;
+        int legajo = 0;
+        if (txt_numeroDoc.Text != "")
+            numDoc = int.Parse(txt_numeroDoc.Text);
+        if (txt_legajo.Text != "")
+            legajo = int.Parse(txt_legajo.Text);
+        grillaDocente.DataSource = DocenteDao.buscarPorParametros(txt_nombre.Text, txt_apellido.Text, legajo, numDoc, ddl_tipoDoc.SelectedIndex);
+        grillaDocente.DataKeyNames = new string[] { "legajo" };
+        grillaDocente.DataBind();
+
+        txt_apellido.Text = "";
+        txt_legajo.Text = "";
+        txt_nombre.Text = "";
+        txt_numeroDoc.Text = "";
+        ddl_tipoDoc.Focus();
+    }
 }

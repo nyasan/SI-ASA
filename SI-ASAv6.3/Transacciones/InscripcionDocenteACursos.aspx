@@ -17,10 +17,13 @@
         <asp:TextBox ID="txt_apellido" runat="server"></asp:TextBox><br />
         <label>Legajo</label>
         <asp:TextBox ID="txt_legajo" runat="server"></asp:TextBox><br /><br />
-        <asp:Button ID="btn_Buscar" runat="server" Text="Buscar" />
+        <asp:Button ID="btn_Buscar" runat="server" Text="Buscar" 
+            onclick="btn_Buscar_Click" />
         <br /><br />
         </fieldset>
-        <asp:GridView ID="gv_busqueda" runat="server" AutoGenerateColumns="False">
+        <asp:GridView ID="gv_busqueda" runat="server" AutoGenerateColumns="False" 
+            AutoGenerateSelectButton="True" 
+            onselectedindexchanged="gv_busqueda_SelectedIndexChanged">
         
         <Columns>
             <asp:BoundField HeaderText="Legajo" DataField="legajo" />
@@ -38,7 +41,8 @@
     <br />
     <label>Cursos</label>
     <asp:ListBox ID="list_cursos" runat="server" 
-            onselectedindexchanged="list_cursos_SelectedIndexChanged"></asp:ListBox>
+            onselectedindexchanged="list_cursos_SelectedIndexChanged" 
+            SelectionMode="Multiple"></asp:ListBox>
     </fieldset>
     <asp:Button ID="btnRegistrar" runat="server" Text="Registrar" 
         onclick="btnRegistrar_Click" />

@@ -109,12 +109,13 @@ public partial class ABMC_Alumno : System.Web.UI.Page
     protected void btn_Guardar_Click(object sender, EventArgs e)
     {
         Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "clave", "alert('I am here');", true);
+
         String tipoDoc;
         TipoDocumento TipoDoc;
-        if (ddl_TipoDoc.SelectedItem != null)
+        if (ddl_TipoDoc.SelectedValue != null)
         {
-            tipoDoc = ddl_TipoDoc.SelectedItem.Text;
-            TipoDoc = TipoDocumentoDao.obtenerTipoDocumento(ddl_TipoDoc.SelectedIndex).ElementAt(1);
+            tipoDoc = ddl_TipoDoc.SelectedValue.ToString();
+            TipoDoc = TipoDocumentoDao.obtenerTipoDocumento(ddl_TipoDoc.SelectedIndex + 1);
             TipoDoc.descripcion = tipoDoc;
         }
         else
@@ -126,10 +127,10 @@ public partial class ABMC_Alumno : System.Web.UI.Page
         String tipoDocMadre;
         TipoDocumento TipoDocMadre;
 
-        if (ddl_TipoDocMadre.SelectedItem != null)
+        if (ddl_TipoDocMadre.SelectedValue != null)
         {
-            tipoDocMadre = ddl_TipoDocMadre.SelectedItem.Text;
-            TipoDocMadre = TipoDocumentoDao.obtenerTipoDocumento(ddl_TipoDocMadre.SelectedIndex).ElementAt(1);
+            tipoDocMadre = ddl_TipoDocMadre.SelectedValue.ToString();
+            TipoDocMadre = TipoDocumentoDao.obtenerTipoDocumento(ddl_TipoDocMadre.SelectedIndex + 1);
             TipoDocMadre.descripcion = tipoDocMadre;
         }
         else
@@ -140,10 +141,10 @@ public partial class ABMC_Alumno : System.Web.UI.Page
 
         String tipoDocPadre;
         TipoDocumento TipoDocPadre;
-        if (ddl_TipoDocPadre.SelectedItem != null)
+        if (ddl_TipoDocPadre.SelectedValue != null)
         {
-            tipoDocPadre = ddl_TipoDocPadre.SelectedItem.Text;
-            TipoDocPadre = TipoDocumentoDao.obtenerTipoDocumento(ddl_TipoDocPadre.SelectedIndex).ElementAt(1);
+            tipoDocPadre = ddl_TipoDocPadre.SelectedValue.ToString();
+            TipoDocPadre = TipoDocumentoDao.obtenerTipoDocumento(ddl_TipoDocPadre.SelectedIndex + 1);
             TipoDocPadre.descripcion = tipoDocMadre;
         }
         else
@@ -194,20 +195,73 @@ public partial class ABMC_Alumno : System.Web.UI.Page
             flag = false;
         alumno.conoceMusica = flag;
 
-        NivelEstudio nivelEstudio = new NivelEstudio(ddl_NivelEstudio.SelectedItem.Text);
-
+        //NivelEstudio nivelEstudio = new NivelEstudio(NivelEstudioDao.obtener(ddl_NivelEstudio.SelectedIndex + 1).descripcion);
+        NivelEstudio nivelEstudio = new NivelEstudio();
+        if (ddl_NivelEstudio.SelectedValue != null)
+            nivelEstudio.descripcion = ddl_NivelEstudio.SelectedValue.ToString();
+        
         alumno.nivelEstudio = nivelEstudio;
 
-        Alumno alumnoViejo = AlumnoDao.obtenerPorLegajo(int.Parse(txt_legajo.Text));
-        Persona personaAlumnoViejo = PersonaDao.obtenerPorDatos(int.Parse(txt_NumDoc.Text),ddl_TipoDoc.SelectedItem.Text); 
-        Persona madreVieja = PersonaDao.obtenerPorDatos(int.Parse(txt_NumDoc.Text), ddl_TipoDocMadre.SelectedItem.Text);
-        Persona padreViejo = PersonaDao.obtenerPorDatos(int.Parse(txt_NumDoc.Text), ddl_TipoDocPadre.SelectedItem.Text);
+        string descripcionDocAlumno = "";
+        string descripcionDocMadre = "";
+        string descripcionDocPadre = "";
+        switch (ddl_TipoDoc.SelectedValue.ToString())
+        {
+            case "0":
+                descripcionDocAlumno = "DNI";
+                break;
+            case "1":
+                descripcionDocAlumno = "LE";
+                break;
+            case "2":
+                descripcionDocAlumno = "LC";
+                break;
+        }
+        switch (ddl_TipoDocMadre.SelectedValue.ToString())
+        {
+            case "0":
+                descripcionDocMadre = "DNI";
+                break;
+            case "1":
+                descripcionDocMadre = "LE";
+                break;
+            case "2":
+                descripcionDocMadre = "LC";
+                break;
+        }
+        switch (ddl_TipoDocPadre.SelectedValue.ToString())
+        {
+            case "0":
+                descripcionDocPadre = "DNI";
+                break;
+            case "1":
+                descripcionDocPadre = "LE";
+                break;
+            case "2":
+                descripcionDocPadre = "LC";
+                break;
+        }
+        alumno.alumno = alumnoPersona;
+        alumno.madre = madre;
+        alumno.padre = padre;
+
+        alumno.alumno.tipoDoc.descripcion = descripcionDocAlumno;
+        alumno.madre.tipoDoc.descripcion = descripcionDocMadre;
+        alumno.padre.tipoDoc.descripcion = descripcionDocPadre;
+        
 
         if (AlumnoDao.exists(int.Parse(txt_legajo.Text)))
+        {
+            
+            Alumno alumnoViejo = AlumnoDao.obtenerPorLegajo(int.Parse(txt_legajo.Text));
+            Persona personaAlumnoViejo = PersonaDao.obtenerPorDatos(int.Parse(txt_NumDoc.Text), descripcionDocAlumno);
+            Persona madreVieja = PersonaDao.obtenerPorDatos(int.Parse(txt_NumDoc.Text), descripcionDocMadre);
+            Persona padreViejo = PersonaDao.obtenerPorDatos(int.Parse(txt_NumDoc.Text), descripcionDocPadre);
+            
             AlumnoDao.update(alumnoViejo, alumno, personaAlumnoViejo, alumnoPersona, madreVieja, padreViejo, madre, padre);
+        }
         else
             AlumnoDao.add(alumno, madre, alumnoPersona, padre);
-
     }
 
     

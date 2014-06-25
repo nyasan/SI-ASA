@@ -169,9 +169,9 @@ namespace SI_ASA_DAOv1
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
 
-                cmd.Parameters.AddWithValue("id_persona", PersonaDao.add(docenteP));
-                cmd.Parameters.AddWithValue("id_horario_trabajo", HorarioDao.add(horarioTrabajo));
-                cmd.Parameters.AddWithValue("salario", docente.salario);
+                cmd.Parameters.AddWithValue("@id_persona", PersonaDao.add(docenteP));
+                cmd.Parameters.AddWithValue("@id_horario_trabajo", HorarioDao.add(horarioTrabajo));
+                cmd.Parameters.AddWithValue("@salario", docente.salario);
 
                 i= (int) cmd.ExecuteScalar();
             }
@@ -202,7 +202,7 @@ namespace SI_ASA_DAOv1
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
 
-                cmd.Parameters.AddWithValue("legajo", docente.legajo);
+                cmd.Parameters.AddWithValue("@legajo", docente.legajo);
 
                 PersonaDao.delete(docente.docente);
 
@@ -235,12 +235,12 @@ namespace SI_ASA_DAOv1
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
 
-                cmd.Parameters.AddWithValue("id_horario_trabajo_nuevo", HorarioDao.update(horarioViejo, horarioNuevo));
-                cmd.Parameters.AddWithValue("salario_nuevo", docenteNuevo.salario);
+                cmd.Parameters.AddWithValue("@id_horario_trabajo_nuevo", HorarioDao.update(horarioViejo, horarioNuevo));
+                cmd.Parameters.AddWithValue("@salario_nuevo", docenteNuevo.salario);
 
-                cmd.Parameters.AddWithValue("id_persona", PersonaDao.update(personaVieja, personaVieja));
-                cmd.Parameters.AddWithValue("id_horario_trabajo", HorarioDao.update(horarioViejo, horarioViejo));
-                cmd.Parameters.AddWithValue("salario", docenteViejo.salario);
+                cmd.Parameters.AddWithValue("@id_persona", PersonaDao.update(personaVieja, personaVieja));
+                cmd.Parameters.AddWithValue("@id_horario_trabajo", HorarioDao.update(horarioViejo, horarioViejo));
+                cmd.Parameters.AddWithValue("@salario", docenteViejo.salario);
 
                 i = (int) cmd.ExecuteScalar();
             }

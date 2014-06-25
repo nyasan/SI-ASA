@@ -33,17 +33,29 @@ public partial class Informes_grillaAlumnos : System.Web.UI.Page
         gv_busqueda.DataBind();
     }
 
-    protected void btnBuscar_Click(object sender, EventArgs e)
-    {
-        //cargar en la grilla, la colección de alumnos resultante de todas las coincidencias 
-        //de todos los textbox ingresados
-    }
-
     protected void gv_busqueda_SelectedIndexChanged(object sender, EventArgs e)
     {
         Alumno alumno = AlumnoDao.obtenerPorLegajo(int.Parse(gv_busqueda.SelectedRow.Cells[1].Text));
         Session ["legajo"] = alumno.legajo;
         Session["origen"] = "consulta";
         Response.Redirect("Alumno.aspx");
+    }
+    protected void btn_Buscar_Click(object sender, EventArgs e)
+    {
+        int numDoc = 0;
+        int legajo = 0;
+        if (txt_numeroDoc.Text != "")
+             numDoc= int.Parse(txt_numeroDoc.Text);
+        if (txt_legajo.Text != "")
+            legajo = int.Parse(txt_legajo.Text);
+        gv_busqueda.DataSource = AlumnoDao.buscarPorParametros(txt_nombre.Text, txt_apellido.Text, legajo, numDoc, ddl_tipoDoc.SelectedIndex);
+        gv_busqueda.DataKeyNames = new string[] { "legajo" };
+        gv_busqueda.DataBind();
+
+        txt_apellido.Text = "";
+        txt_legajo.Text = "";
+        txt_nombre.Text = "";
+        txt_numeroDoc.Text = "";
+        ddl_tipoDoc.Focus();
     }
 }

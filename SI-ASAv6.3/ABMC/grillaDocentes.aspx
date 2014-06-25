@@ -15,7 +15,8 @@
         <asp:TextBox ID="txt_apellido" runat="server"></asp:TextBox><br />
         <label>Legajo</label>
         <asp:TextBox ID="txt_legajo" runat="server"></asp:TextBox><br /><br />
-        <br /><asp:Button ID="btn_Buscar" runat="server" Text="Buscar" />
+        <br /><asp:Button ID="btn_Buscar" runat="server" Text="Buscar" 
+            onclick="btn_Buscar_Click" />
         </fieldset>
         <asp:GridView ID="grillaDocente" runat="server" AutoGenerateColumns="False" 
             onselectedindexchanged="grillaDocente_SelectedIndexChanged" 

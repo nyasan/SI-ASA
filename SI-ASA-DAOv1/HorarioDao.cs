@@ -90,6 +90,8 @@ namespace SI_ASA_DAOv1
             {
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
+                cmd.Parameters.AddWithValue("@desde", desde);
+                cmd.Parameters.AddWithValue("@hasta", hasta);
                 SqlDataReader dr = cmd.ExecuteReader();
 
                 id = (int) dr["id_horario"];
@@ -120,8 +122,8 @@ namespace SI_ASA_DAOv1
             {
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
-                cmd.Parameters.AddWithValue("horario_inicio", horario.desde);
-                cmd.Parameters.AddWithValue("horario_fin", horario.hasta);
+                cmd.Parameters.AddWithValue("@horario_inicio", horario.desde);
+                cmd.Parameters.AddWithValue("@horario_fin", horario.hasta);
                 i = (int) cmd.ExecuteNonQuery();
             }
             catch (SqlException ex)
@@ -151,8 +153,8 @@ namespace SI_ASA_DAOv1
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
 
-                cmd.Parameters.AddWithValue("horario_inicio", horario.desde);
-                cmd.Parameters.AddWithValue("horario_fin", horario.hasta);
+                cmd.Parameters.AddWithValue("@horario_inicio", horario.desde);
+                cmd.Parameters.AddWithValue("@horario_fin", horario.hasta);
 
                 i = (int) cmd.ExecuteScalar();
             }
@@ -181,10 +183,10 @@ namespace SI_ASA_DAOv1
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
 
-                cmd.Parameters.AddWithValue("horario_inicio", horarioViejo.desde);
-                cmd.Parameters.AddWithValue("horario_fin", horarioViejo.hasta);
-                cmd.Parameters.AddWithValue("horario_inicioNuevo", horarioNuevo.desde);
-                cmd.Parameters.AddWithValue("horario_finNuevo", horarioNuevo.hasta);
+                cmd.Parameters.AddWithValue("@horario_inicio", horarioViejo.desde);
+                cmd.Parameters.AddWithValue("@horario_fin", horarioViejo.hasta);
+                cmd.Parameters.AddWithValue("@horario_inicioNuevo", horarioNuevo.desde);
+                cmd.Parameters.AddWithValue("@horario_finNuevo", horarioNuevo.hasta);
 
                 i = (int)cmd.ExecuteScalar();
             }

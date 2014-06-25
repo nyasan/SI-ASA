@@ -24,6 +24,12 @@ public partial class ABMC_Curso : System.Web.UI.Page
         horario.hasta = txt_Hasta.Text;
 
         CursoDao.Insertar(curso, horario);
+
+        txt_IDCurso.Text = CursoDao.MaxId().ToString();
+        txt_nombre.Text = "";
+        txt_Hasta.Text = "";
+        txt_Desde.Text = "";
+        txt_Descripcion.Text = "";
     }
     protected void btn_Eliminar_Click(object sender, EventArgs e)
     {

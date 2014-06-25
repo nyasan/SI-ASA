@@ -31,7 +31,7 @@ public partial class ABMC_Docente : System.Web.UI.Page
         docentePersona.nombre = txt_Nombre.Text;
         docentePersona.apellido = txt_Apellido.Text;
         docentePersona.numDoc = int.Parse(txt_NumDoc.Text);
-        docentePersona.tipoDoc = TipoDocumentoDao.obtenerTipoDocumento(ddl_TipoDoc.SelectedIndex).ElementAt(1);
+        docentePersona.tipoDoc = TipoDocumentoDao.obtenerTipoDocumento(ddl_TipoDoc.SelectedIndex);
         docentePersona.domicilio = txt_Domicilio.Text;
         docentePersona.telefono = txt_Telefono.Text;
         docentePersona.celular = txt_Celular.Text;

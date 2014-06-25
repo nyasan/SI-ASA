@@ -254,7 +254,7 @@ namespace SI_ASA_DAOv1
                     case "Posgrado": idNivelEstudio = 10;
                         break;
                 }
-                cmd.Parameters.AddWithValue("id_nivel_estudio", idNivelEstudio);
+                cmd.Parameters.AddWithValue("@id_nivel_estudio", idNivelEstudio);
                 i = (int)cmd.ExecuteScalar();
             }
             catch (SqlException ex)
@@ -282,7 +282,7 @@ namespace SI_ASA_DAOv1
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
 
-                cmd.Parameters.AddWithValue("legajo", alumno.legajo);
+                cmd.Parameters.AddWithValue("@legajo", alumno.legajo);
 
                 PersonaDao.delete(alumno.alumno);
                 PersonaDao.delete(alumno.madre);
@@ -367,16 +367,16 @@ namespace SI_ASA_DAOv1
                         break;
                 }
                 
-                cmd.Parameters.AddWithValue("id_madre_nuevo", PersonaDao.update(madreVieja, madreNueva));
-                cmd.Parameters.AddWithValue("id_padre_nuevo", PersonaDao.update(padreViejo, padreNuevo));
-                cmd.Parameters.AddWithValue("conoce_musica_nuevo", (Boolean)alumnoNuevo.conoceMusica);
-                cmd.Parameters.AddWithValue("id_nivel_estudio_nuevo", idNivelEstudioNuevo);
+                cmd.Parameters.AddWithValue("@id_madre_nuevo", PersonaDao.update(madreVieja, madreNueva));
+                cmd.Parameters.AddWithValue("@id_padre_nuevo", PersonaDao.update(padreViejo, padreNuevo));
+                cmd.Parameters.AddWithValue("@conoce_musica_nuevo", (Boolean)alumnoNuevo.conoceMusica);
+                cmd.Parameters.AddWithValue("@id_nivel_estudio_nuevo", idNivelEstudioNuevo);
 
-                cmd.Parameters.AddWithValue("id_persona", PersonaDao.update(personaAlumnoViejo, personaAlumnoViejo));
-                cmd.Parameters.AddWithValue("id_madre", PersonaDao.update(madreVieja, madreVieja));
-                cmd.Parameters.AddWithValue("id_padre", PersonaDao.update(padreViejo, padreViejo));
-                cmd.Parameters.AddWithValue("conoce_musica", (Boolean)alumnoViejo.conoceMusica);
-                cmd.Parameters.AddWithValue("id_nivel_estudio", idNivelEstudioViejo);
+                cmd.Parameters.AddWithValue("@id_persona", PersonaDao.update(personaAlumnoViejo, personaAlumnoViejo));
+                cmd.Parameters.AddWithValue("@id_madre", PersonaDao.update(madreVieja, madreVieja));
+                cmd.Parameters.AddWithValue("@id_padre", PersonaDao.update(padreViejo, padreViejo));
+                cmd.Parameters.AddWithValue("@conoce_musica", (Boolean)alumnoViejo.conoceMusica);
+                cmd.Parameters.AddWithValue("@id_nivel_estudio", idNivelEstudioViejo);
 
                 i = (int) cmd.ExecuteScalar();
             }
@@ -407,7 +407,7 @@ namespace SI_ASA_DAOv1
             {
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
-                cmd.Parameters.AddWithValue("legajo", legajo);
+                cmd.Parameters.AddWithValue("@legajo", legajo);
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
