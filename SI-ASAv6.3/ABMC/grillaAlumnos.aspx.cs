@@ -12,8 +12,12 @@ public partial class Informes_grillaAlumnos : System.Web.UI.Page
     List<Alumno> listAlumno = new List<Alumno>();
     protected void Page_Load(object sender, EventArgs e)
     {
-        cargarCombo(ddl_tipoDoc);
-        cargarGrilla();
+        if(!IsPostBack)
+        {
+             cargarCombo(ddl_tipoDoc);
+             cargarGrilla();
+        }
+      
     }
 
     protected void cargarCombo(DropDownList ddl)
@@ -44,11 +48,16 @@ public partial class Informes_grillaAlumnos : System.Web.UI.Page
     {
         int numDoc = 0;
         int legajo = 0;
+        int tipo_doc = 0;
+        if (ddl_tipoDoc.SelectedItem.Value != "")
+        {
+            tipo_doc = int.Parse(ddl_tipoDoc.SelectedItem.Value);
+        }
         if (txt_numeroDoc.Text != "")
              numDoc= int.Parse(txt_numeroDoc.Text);
         if (txt_legajo.Text != "")
             legajo = int.Parse(txt_legajo.Text);
-        gv_busqueda.DataSource = AlumnoDao.buscarPorParametros(txt_nombre.Text, txt_apellido.Text, legajo, numDoc, ddl_tipoDoc.SelectedIndex);
+        gv_busqueda.DataSource = AlumnoDao.buscarPorParametros(txt_nombre.Text, txt_apellido.Text, legajo, numDoc, tipo_doc);
         gv_busqueda.DataKeyNames = new string[] { "legajo" };
         gv_busqueda.DataBind();
 

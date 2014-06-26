@@ -59,13 +59,13 @@ public partial class User_Control_busqueda : System.Web.UI.UserControl
             txt_numeroDoc.Text = value;
         }
     }
-    public Object tipoDoc
+    public int tipoDoc
     {
         //OJO CON OBJECT ACA!!
         //ESTE METODO ESTA PARA EL ORT...MEPA :P
         get
         {
-            return ddl_tipoDoc.SelectedItem.Value;
+            return int.Parse(ddl_tipoDoc.SelectedItem.Value);
         }
         set
         {

@@ -18,7 +18,7 @@ namespace SI_ASA_DAOv1
             string sql = "SELECT * FROM alumnos a JOIN personas pA ON (a.id_persona = pA.id) ";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -54,69 +54,7 @@ namespace SI_ASA_DAOv1
 
         }
 
-        public static List<Alumno> buscarPorParametros(String nombre, String apellido, int legajo)
-        {
-            List<Alumno> listAlumnos = new List<Alumno>();
 
-            string sql = @"SELECT        a.legajo, a.id_persona, a.id_madre, a.id_padre, a.conoce_musica, a.id_nivel_estudio
-                         FROM            alumnos AS a INNER JOIN
-                         personas AS pA ON a.id_persona = pA.id
-                         WHERE        (1 = 1) ";
-
-            if (nombre != "")
-                sql += " AND (pA.nombre LIKE @nombre)";
-            if (apellido != "")
-                sql += " AND (pA.apellido LIKE @apellido)";
-            if (legajo != 0)
-                sql += " AND (a.legajo = @legajo)";
-
-            SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
-            //PONER LA STRINGCONNECTION CORRECTA!!!
-
-            try
-            {
-                cn.Open();
-                SqlCommand cmd = new SqlCommand(sql, cn);
-
-                if(nombre!="")
-                    cmd.Parameters.AddWithValue("@nombre", "%" + nombre + "%");
-                if(apellido!="")
-                    cmd.Parameters.AddWithValue("@apellido", "%" + apellido + "%");
-                if(legajo!=0)
-                    cmd.Parameters.AddWithValue("@legajo", legajo);
-
-                SqlDataReader dr = cmd.ExecuteReader();
-                int c = 0;
-                while (dr.Read())
-                {
-                    Alumno alumno = new Alumno()
-                    {
-                        legajo = (int)dr["legajo"],
-                        conoceMusica = (Boolean)dr["conoce_musica"],
-                        madre = PersonaDao.obtenerPersona((int)(dr["id_madre"])),
-                        padre = PersonaDao.obtenerPersona((int)(dr["id_padre"])),
-                        nivelEstudio = NivelEstudioDao.obtener((int)(dr["id_nivel_estudio"]))
-                    };
-
-                    listAlumnos.Add(alumno); //lleno la coleccion en memoria
-                    c++;
-                }
-                dr.Close();
-
-            }
-            catch (SqlException ex)
-            {
-                throw new ApplicationException("Error al buscar los Alumnos");
-            }
-            finally
-            {
-                cn.Close();
-            }
-            return listAlumnos;
-
-
-        }
         public static Alumno obtener(int id)
         {
             Alumno alumno = new Alumno();
@@ -127,7 +65,7 @@ namespace SI_ASA_DAOv1
                          WHERE                    (a.id_persona = @idPersona)";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -168,7 +106,7 @@ namespace SI_ASA_DAOv1
                          WHERE        (a.legajo = @legajo)";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -216,7 +154,7 @@ namespace SI_ASA_DAOv1
                          (id_persona, id_madre, id_padre, conoce_musica, id_nivel_estudio)
                          VALUES        (@id_persona,@id_madre,@id_padre,@conoce_musica,@id_nivel_estudio)";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -255,7 +193,8 @@ namespace SI_ASA_DAOv1
                         break;
                 }
                 cmd.Parameters.AddWithValue("@id_nivel_estudio", idNivelEstudio);
-                i = (int)cmd.ExecuteScalar();
+                cmd.ExecuteNonQuery();
+                i = 2;
             }
             catch (SqlException ex)
             {
@@ -310,7 +249,7 @@ namespace SI_ASA_DAOv1
                          WHERE        (id_persona = @id_persona) AND (id_madre = @id_madre) AND (id_padre = @id_padre) AND (conoce_musica = @conoce_musica) AND (id_nivel_estudio = @id_nivel_estudio)";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
 
             try
             {
@@ -400,7 +339,7 @@ namespace SI_ASA_DAOv1
                          WHERE        (legajo = @legajo)";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -445,9 +384,9 @@ namespace SI_ASA_DAOv1
             if (legajo != 0)
                 sql += " AND (a.legajo = @legajo)";
             if (numero != 0 && tipo_documento != 0)
-                sql += " AND (a.numero = @numero) AND (a.tipo_documento = @tipo_documento)";
+                sql += " AND (pA.nro_documento = @numero) AND (pA.id_tipo_documento = @tipo_documento)";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
 
             try
             {
@@ -488,7 +427,7 @@ namespace SI_ASA_DAOv1
             }
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error al buscar los Alumnos");
+                throw new ApplicationException("Error al buscar los Alumnos "+ ex.Message );
             }
             finally
             {
@@ -505,7 +444,7 @@ namespace SI_ASA_DAOv1
                          FROM            alumnos";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
 
             try
             {
