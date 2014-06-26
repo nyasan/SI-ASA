@@ -18,7 +18,7 @@ namespace SI_ASA_DAOv1
             string sql = "SELECT * FROM alumnos a JOIN personas pA ON (a.id_persona = pA.id) ";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -429,9 +429,9 @@ namespace SI_ASA_DAOv1
             if (legajo != 0)
                 sql += " AND (a.legajo = @legajo)";
             if (numero != 0 && tipo_documento != 0)
-                sql += " AND (pA.nro_documento = @numero) AND (pA.tipo_documento = @tipo_documento)";
+                sql += " AND (pA.nro_documento = @numero) AND (pA.id_tipo_documento = @tipo_documento)";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
 
             try
             {

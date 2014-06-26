@@ -88,7 +88,7 @@ namespace SI_ASA_DAOv1
             string sql = "SELECT * FROM personas p WHERE p.id = @idPersona";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
             try
             {
@@ -101,11 +101,12 @@ namespace SI_ASA_DAOv1
                         persona.apellido = dr["apellido"].ToString();
                         persona.numDoc = int.Parse(dr["nro_documento"].ToString());
                         persona.tipoDoc = TipoDocumentoDao.obtenerTipoDocumentoPorId(int.Parse(dr["id_tipo_documento"].ToString()));
-                        persona.domicilio = dr["domicilio"].ToString();
+                        persona.domicilio = dr["domiclio"].ToString();
                         persona.telefono = dr["telefono"].ToString();
                         persona.celular = dr["celular"].ToString();
                         persona.mail = dr["mail"].ToString();
-                        persona.fechaNacimiento = DateTime.Parse(dr["fecha_nacimiento"].ToString());
+                        String fecha = dr["fecha_nacimiento"].ToString();
+                        persona.fechaNacimiento = DateTime.Parse(fecha);
                 
                 dr.Close();
                 cn.Close();

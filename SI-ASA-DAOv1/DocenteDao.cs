@@ -14,12 +14,12 @@ namespace SI_ASA_DAOv1
         {
             List<Docente> listDocentes = new List<Docente>();
 
-            string sql = @"SELECT        d.legajo, d.id_persona, d.id_horario_trabajo, d.salario, p.id, p.nombre, p.apellido, p.nro_documento, p.domicilio, p.telefono, p.id_tipo_documento, p.celular, p.mail, p.fecha_nacimiento
+            string sql = @"SELECT        d.legajo, d.id_persona, d.id_horario_trabajo, d.salario, p.id, p.nombre, p.apellido, p.nro_documento, p.telefono, p.id_tipo_documento, p.celular, p.mail, p.fecha_nacimiento
                          FROM            docentes AS d INNER JOIN
                          personas AS p ON d.id_persona = p.id";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -68,10 +68,10 @@ namespace SI_ASA_DAOv1
             if (legajo != 0)
                 sql += " AND (a.legajo = @legajo)";
             if (tipo_documento != 0 && numero != 0)
-                sql += " AND (a.tipo_documento = @tipo_documento) AND (numero = @numero)";
+                sql += " AND (pA.id_tipo_documento = @tipo_documento) AND (pA.nro_documento = @numero)";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -101,6 +101,7 @@ namespace SI_ASA_DAOv1
                         salario = float.Parse(dr["salario"].ToString()),
                         horarioTrabajo = HorarioDao.obtener(int.Parse(dr["id_horario_trabajo"].ToString()))
                     };
+                    listDocentes.Add(docente);
                 }
                 dr.Close();
 

@@ -63,7 +63,7 @@ namespace SI_ASA_DAOv1
                          horarios ON cursos.id_horario = horarios.id_horario
                          WHERE        (cursos.nombre LIKE @nombre)";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
             try
             {
                 cn.Open();
@@ -106,7 +106,7 @@ namespace SI_ASA_DAOv1
                          FROM            cursos INNER JOIN
                          horarios ON cursos.id_horario = horarios.id_horario";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
             try
             {
                 cn.Open();
