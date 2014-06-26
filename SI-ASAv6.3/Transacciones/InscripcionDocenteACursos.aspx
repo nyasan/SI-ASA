@@ -4,8 +4,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <fieldset><legend>Inscripcion de Docentes</legend>
-    
-    <label>-Buscar docentes y seleccionar uno-</label><br />
+    <asp:Label ID="lblDocente" runat="server" Text="Label">-Buscar docentes y seleccionar uno-</asp:Label>
+   <br />
     <fieldset><legend>Busqueda</legend>
         <label>Tipo de Documento</label>
         <asp:DropDownList ID="ddl_tipoDoc" runat="server"></asp:DropDownList><br />

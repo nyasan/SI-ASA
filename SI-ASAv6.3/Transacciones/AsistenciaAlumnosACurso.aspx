@@ -19,6 +19,9 @@
             <asp:BoundField DataField="alumno.apellido" HeaderText="Apellido" />
         </Columns>
     </asp:GridView>
+    <asp:ListBox ID="listaAsistencia" runat="server"></asp:ListBox>
+    <asp:Button ID="btnQuitar" runat="server" onclick="btnQuitar_Click" 
+        Text="Quitar" />
     <br />
     </fieldset>
     <asp:Button ID="btn_registrar" runat="server" Text="Registrar Asistencia" 

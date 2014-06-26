@@ -9,12 +9,15 @@ using SI_ASA_ENTIDADESv1;
 
 public partial class Transacciones_InscripcionAlumnoACursos : System.Web.UI.Page
 {
-    private LinkedList<int> idCursos;
+    private List<int> idCursos=null;
     protected void Page_Load(object sender, EventArgs e)
     {
-        cargarLista(list_cursos);
-        cargarCombo(ddl_tipoDoc);
-        cargarGrilla();
+        if (!IsPostBack)
+        {
+            cargarLista(list_cursos);
+            cargarCombo(ddl_tipoDoc);
+            cargarGrilla();
+        }
     }
     protected void cargarCombo(DropDownList ddl)
     {
@@ -40,18 +43,29 @@ public partial class Transacciones_InscripcionAlumnoACursos : System.Web.UI.Page
     }
 
     protected void list_cursos_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        idCursos.AddLast(list_cursos.SelectedIndex);
+    {   
+       
     }
     protected void btnRegistrar_Click(object sender, EventArgs e)
     {
+        idCursos = new List<int>();
+        foreach (ListItem i in list_cursos.Items)
+        {
+            if (i.Selected) idCursos.Add(int.Parse(i.Value));
+        }
         if(gv_busqueda.SelectedRow != null || idCursos.Count > 0)
             AlumnosxCursoDao.registrarCursadoAlumno(AlumnoDao.obtenerPorLegajo(int.Parse(gv_busqueda.SelectedRow.Cells[1].Text)), idCursos, DateTime.Now);
     }
     protected void gv_busqueda_SelectedIndexChanged(object sender, EventArgs e)
     {
         //IMPLEMENTAR: si se selecciona uno, se deselecciona el anterior. No pueden haber mas de dos alumnos seleccionados.
-        
+        // Get the currently selected row using the SelectedRow property.
+        GridViewRow row = gv_busqueda.SelectedRow;
+
+        // Display the first name from the selected row.
+        // In this example, the third column (index 2) contains
+        // the first name.
+        lblAlumno.Text = row.Cells[1].Text;
     }
     protected void btn_Buscar_Click(object sender, EventArgs e)
     {
@@ -70,5 +84,9 @@ public partial class Transacciones_InscripcionAlumnoACursos : System.Web.UI.Page
         txt_nombre.Text = "";
         txt_numeroDoc.Text = "";
         ddl_tipoDoc.Focus();
+    }
+    protected void gv_busqueda_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+       
     }
 }

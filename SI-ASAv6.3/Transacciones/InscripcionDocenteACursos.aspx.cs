@@ -8,12 +8,15 @@ using SI_ASA_DAOv1;
 
 public partial class Transacciones_InscripcionDocenteACursos : System.Web.UI.Page
 {
-    private LinkedList<int> idCursos = new LinkedList<int>();
+    private List<int> idCursos;
     protected void Page_Load(object sender, EventArgs e)
     {
-        cargarLista(list_cursos);
-        cargarCombo(ddl_tipoDoc);
-        cargarGrilla();
+        if (!IsPostBack)
+        {
+            cargarLista(list_cursos);
+            cargarCombo(ddl_tipoDoc);
+            cargarGrilla();
+        }
     }
 
     protected void cargarLista(ListBox lista)
@@ -43,10 +46,16 @@ public partial class Transacciones_InscripcionDocenteACursos : System.Web.UI.Pag
 
     protected void list_cursos_SelectedIndexChanged(object sender, EventArgs e)
     {
-        idCursos.AddLast(list_cursos.SelectedIndex);
+       
     }
     protected void btnRegistrar_Click(object sender, EventArgs e)
     {
+        idCursos = new List<int>();
+        idCursos = new List<int>();
+        foreach (ListItem i in list_cursos.Items)
+        {
+            if (i.Selected) idCursos.Add(int.Parse(i.Value));
+        }
         if (gv_busqueda.SelectedRow != null || idCursos.Count > 0)
             Docente_x_cursoDao.registrarCursadoDocente(DocenteDao.obtenerPorLegajo(int.Parse(gv_busqueda.SelectedRow.Cells[1].Text)), idCursos, DateTime.Now);
     }
@@ -70,7 +79,12 @@ public partial class Transacciones_InscripcionDocenteACursos : System.Web.UI.Pag
     }
     protected void gv_busqueda_SelectedIndexChanged(object sender, EventArgs e)
     {
-        //Se debe incorporar una funcionalidad de manera que se des-seleccione la selección anterior 
-        //ya que se inscribe un UNICO docente a VARIOS cursos
+        // Get the currently selected row using the SelectedRow property.
+        GridViewRow row = gv_busqueda.SelectedRow;
+
+        // Display the first name from the selected row.
+        // In this example, the third column (index 2) contains
+        // the first name.
+        lblDocente.Text = row.Cells[1].Text;
     }
 }

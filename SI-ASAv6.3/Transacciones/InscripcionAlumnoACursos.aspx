@@ -6,8 +6,7 @@
 <fieldset><legend>Inscripcion a cursado</legend>
     
     <legend>Listado de alumnos</legend>
-    <label>-Seleccione un alumno-</label>
-    
+    <asp:Label ID="lblAlumno" runat="server" Text="Label">-Seleccione un alumno-</asp:Label>
     <fieldset><legend>Busqueda</legend>
         <label>Tipo de Documento</label>
         <asp:DropDownList ID="ddl_tipoDoc" runat="server"></asp:DropDownList><br />

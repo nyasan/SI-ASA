@@ -11,30 +11,34 @@ namespace SI_ASA_DAOv1
     public class AlumnosxCursoDao
     {
 
-        public static void registrarCursadoAlumno(Alumno alumno, LinkedList<int> idCursos, DateTime fechaInscripcion)
+        public static void registrarCursadoAlumno(Alumno alumno, List<int> idCursos, DateTime fechaInscripcion)
         {
-            int i = -1;
+            int i = 1;
             String sql = @"INSERT INTO alumno_x_curso
                          (id_curso, fecha_inscripcion, legajo_alumno)
                          VALUES        (@id_curso,@fecha_inscripcion,@legajo_alumno)";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
+            cn.Open();
             SqlTransaction sqltran = cn.BeginTransaction();
 
             try
             {
-                cn.Open();
+
                 
                 SqlCommand cmd = new SqlCommand(sql, cn);
                 cmd.Transaction = sqltran;
-             
-                while(i<idCursos.Count)
+              
+                foreach(int l in idCursos)
                 {
-                    cmd.Parameters.AddWithValue("@legajo_alumno", alumno.legajo);
-                    cmd.Parameters.AddWithValue("@id_curso", idCursos.ElementAt(i));
-                    cmd.Parameters.AddWithValue("@fecha_inscripcion", fechaInscripcion);
+                    sql = @"INSERT INTO alumno_x_curso
+                         (id_curso, fecha_inscripcion, legajo_alumno)
+                         VALUES        (@id_curso"+l+",@fecha_inscripcion"+l+",@legajo_alumno"+l+")";
+                    cmd.CommandText = sql;
+                    cmd.Parameters.AddWithValue("@legajo_alumno"+l, alumno.legajo);
+                    cmd.Parameters.AddWithValue("@id_curso"+l, l.ToString());
+                    cmd.Parameters.AddWithValue("@fecha_inscripcion"+l, fechaInscripcion);
                     cmd.ExecuteNonQuery();
-                    i++;
                 }
 
                 sqltran.Commit();
@@ -42,7 +46,7 @@ namespace SI_ASA_DAOv1
             }
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error al registrar el Alumno a cursado");
+                throw new ApplicationException("Error al registrar el Alumno a cursado "+ex.Message);
                 try
                 {
                     // Attempt to roll back the transaction.

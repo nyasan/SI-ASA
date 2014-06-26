@@ -10,28 +10,33 @@ namespace SI_ASA_DAOv1
 {
     public class falta_alumno_x_cursoDao
     {
-        public static void registrarAsistencia(List<Alumno> listAlumnos, int idCurso, DateTime fechaAsistencia)
+        public static void registrarAsistencia(List<String> listAlumnos, int idCurso, DateTime fechaAsistencia)
         {
             int i = -1;
             String sql = @"INSERT INTO falta_alumno_x_curso
                          (legajo_alumno, id_curso, fecha_falta)
                          VALUES        (@legajo_alumno,@id_curso,@fecha_falta)";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
+            cn.Open();
             SqlTransaction sqltran = cn.BeginTransaction();
 
             try
             {
-                cn.Open();
+               
 
                 SqlCommand cmd = new SqlCommand(sql, cn);
                 cmd.Transaction = sqltran;
 
-                while (i < listAlumnos.Count)
+                foreach (String l in listAlumnos)
                 {
-                    cmd.Parameters.AddWithValue("@legajo_alumno", listAlumnos.ElementAt(i).legajo);
-                    cmd.Parameters.AddWithValue("@id_curso", idCurso);
-                    cmd.Parameters.AddWithValue("@fecha_falta", fechaAsistencia);
+                    sql = @"INSERT INTO falta_alumno_x_curso
+                         (legajo_alumno, id_curso, fecha_falta)
+                         VALUES        (@legajo_alumno"+l+",@id_curso"+l+",@fecha_falta"+l+")";
+                    cmd.CommandText = sql;
+                    cmd.Parameters.AddWithValue("@legajo_alumno"+l, l);
+                    cmd.Parameters.AddWithValue("@id_curso"+l, idCurso);
+                    cmd.Parameters.AddWithValue("@fecha_falta"+l, fechaAsistencia);
                     cmd.ExecuteNonQuery();
                     i++;
                 }
