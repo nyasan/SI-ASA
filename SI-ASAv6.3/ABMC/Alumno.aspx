@@ -41,6 +41,10 @@
             <asp:TextBox ID="txt_NumDoc" runat="server" AutoCompleteType="None"></asp:TextBox>
             <asp:RequiredFieldValidator ID="rfv_NumDoc" runat="server" ErrorMessage="*Debe completar dicho campo" ControlToValidate="txt_NumDoc"></asp:RequiredFieldValidator>
             
+            <asp:CompareValidator ID="Cv_nroDoc_Alumno" runat="server" 
+                ControlToValidate="txt_NumDoc" Display="Dynamic" 
+                ErrorMessage="*Debe ingresar un número" Operator="DataTypeCheck" Type="Integer"></asp:CompareValidator>
+            
             <br />
 
             <label>Domicilio</label>

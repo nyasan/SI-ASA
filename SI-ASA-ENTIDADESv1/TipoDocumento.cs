@@ -8,6 +8,7 @@ namespace SI_ASA_ENTIDADESv1
     public class TipoDocumento
     {
         public string descripcion { get; set; }
+        public int id { get; set; }
 
         public TipoDocumento() { }
 

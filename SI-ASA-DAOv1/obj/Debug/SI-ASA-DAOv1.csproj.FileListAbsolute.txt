@@ -36,3 +36,10 @@ C:\Users\alejandraBeltramen\Documents\GitHub\SI-ASA\SI-ASA-DAOv1\bin\Debug\SI-AS
 C:\Users\alejandraBeltramen\Documents\GitHub\SI-ASA\SI-ASA-DAOv1\bin\Debug\SI-ASA-ENTIDADESv1.pdb
 C:\Users\alejandraBeltramen\Documents\GitHub\SI-ASA\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.dll
 C:\Users\alejandraBeltramen\Documents\GitHub\SI-ASA\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.pdb
+C:\Users\Nicolás\Desktop\ASA DE ALE ultima oportunidad\SI-ASAv6.3\SI-ASA-DAOv1\bin\Debug\SI-ASA-DAOv1.dll
+C:\Users\Nicolás\Desktop\ASA DE ALE ultima oportunidad\SI-ASAv6.3\SI-ASA-DAOv1\bin\Debug\SI-ASA-DAOv1.pdb
+C:\Users\Nicolás\Desktop\ASA DE ALE ultima oportunidad\SI-ASAv6.3\SI-ASA-DAOv1\bin\Debug\SI-ASA-ENTIDADESv1.dll
+C:\Users\Nicolás\Desktop\ASA DE ALE ultima oportunidad\SI-ASAv6.3\SI-ASA-DAOv1\bin\Debug\SI-ASA-ENTIDADESv1.pdb
+C:\Users\Nicolás\Desktop\ASA DE ALE ultima oportunidad\SI-ASAv6.3\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.csprojResolveAssemblyReference.cache
+C:\Users\Nicolás\Desktop\ASA DE ALE ultima oportunidad\SI-ASAv6.3\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.dll
+C:\Users\Nicolás\Desktop\ASA DE ALE ultima oportunidad\SI-ASAv6.3\SI-ASA-DAOv1\obj\Debug\SI-ASA-DAOv1.pdb

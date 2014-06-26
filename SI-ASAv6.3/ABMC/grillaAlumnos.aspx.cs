@@ -12,12 +12,11 @@ public partial class Informes_grillaAlumnos : System.Web.UI.Page
     List<Alumno> listAlumno = new List<Alumno>();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
-        {
-             cargarCombo(ddl_tipoDoc);
-             cargarGrilla();
-        }
-      
+       if(!IsPostBack)
+         {
+              cargarCombo(ddl_tipoDoc);
+              cargarGrilla();
+         }
     }
 
     protected void cargarCombo(DropDownList ddl)
@@ -49,10 +48,10 @@ public partial class Informes_grillaAlumnos : System.Web.UI.Page
         int numDoc = 0;
         int legajo = 0;
         int tipo_doc = 0;
-        if (ddl_tipoDoc.SelectedItem.Value != "")
-        {
-            tipo_doc = int.Parse(ddl_tipoDoc.SelectedItem.Value);
-        }
+         if (ddl_tipoDoc.SelectedItem.Value != "")
+         {
+             tipo_doc = int.Parse(ddl_tipoDoc.SelectedItem.Value);
+         }
         if (txt_numeroDoc.Text != "")
              numDoc= int.Parse(txt_numeroDoc.Text);
         if (txt_legajo.Text != "")

@@ -17,7 +17,7 @@ namespace SI_ASA_DAOv1
             string sql = "SELECT * FROM nivel_estudio WHERE id = @id";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
             try
             {
@@ -27,6 +27,7 @@ namespace SI_ASA_DAOv1
                 SqlDataReader dr = cmd.ExecuteReader();
                 dr.Read();
                 nivelEstudio.descripcion = dr["descripcion"].ToString();
+                nivelEstudio.id = (int)dr["id"];
                 dr.Close();
                 cn.Close();
             }
@@ -47,7 +48,7 @@ namespace SI_ASA_DAOv1
             string sql = "SELECT * FROM nivel_estudio";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -83,7 +84,7 @@ namespace SI_ASA_DAOv1
             String sql = "INSERT INTO nivel_estudio (descripcion) VALUES (@descripcion)";
             
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -110,7 +111,7 @@ namespace SI_ASA_DAOv1
         public static Object cargarCombo()
         {
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
             SqlCommand sql = new SqlCommand("SELECT * FROM nivel_estudio", cn);
             SqlDataAdapter da = new SqlDataAdapter(sql.CommandText, cn);
             DataSet ds = new DataSet();

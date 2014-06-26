@@ -8,7 +8,7 @@ namespace SI_ASA_ENTIDADESv1
     public class NivelEstudio
     {
         public string descripcion { get; set; }
-
+        public int id { get; set; }
         public NivelEstudio(string descripcion)
         {
             this.descripcion = descripcion;

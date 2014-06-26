@@ -43,7 +43,7 @@ namespace SI_ASA_DAOv1
 
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
             try
             {
                 cn.Open();

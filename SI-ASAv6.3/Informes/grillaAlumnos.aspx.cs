@@ -21,7 +21,7 @@ public partial class Informes_grillaAlumnos : System.Web.UI.Page
 
     protected void btnBuscar_Click(object sender, EventArgs e)
     {
-        listAlumno = AlumnoDao.buscarPorParametros(busquedaPersona.Nombre,busquedaPersona.Apellido,int.Parse(busquedaPersona.Legajo),int.Parse(busquedaPersona.NumeroDoc),busquedaPersona.tipoDoc);
+        listAlumno = AlumnoDao.buscarPorParametros(busquedaPersona.Nombre,busquedaPersona.Apellido,int.Parse(busquedaPersona.Legajo),int.Parse(busquedaPersona.NumeroDoc),busquedaPersona.tipoDocId);
         grillaAlumnos.DataSource = listAlumno;
         grillaAlumnos.DataBind();
     }

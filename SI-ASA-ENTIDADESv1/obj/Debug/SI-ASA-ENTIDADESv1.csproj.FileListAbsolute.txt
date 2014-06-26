@@ -19,3 +19,7 @@ C:\Users\alejandraBeltramen\Documents\GitHub\SI-ASA\SI-ASA-ENTIDADESv1\bin\Debug
 C:\Users\alejandraBeltramen\Documents\GitHub\SI-ASA\SI-ASA-ENTIDADESv1\bin\Debug\SI-ASA-ENTIDADESv1.pdb
 C:\Users\alejandraBeltramen\Documents\GitHub\SI-ASA\SI-ASA-ENTIDADESv1\obj\Debug\SI-ASA-ENTIDADESv1.dll
 C:\Users\alejandraBeltramen\Documents\GitHub\SI-ASA\SI-ASA-ENTIDADESv1\obj\Debug\SI-ASA-ENTIDADESv1.pdb
+C:\Users\Nicolás\Desktop\ASA DE ALE ultima oportunidad\SI-ASAv6.3\SI-ASA-ENTIDADESv1\bin\Debug\SI-ASA-ENTIDADESv1.dll
+C:\Users\Nicolás\Desktop\ASA DE ALE ultima oportunidad\SI-ASAv6.3\SI-ASA-ENTIDADESv1\bin\Debug\SI-ASA-ENTIDADESv1.pdb
+C:\Users\Nicolás\Desktop\ASA DE ALE ultima oportunidad\SI-ASAv6.3\SI-ASA-ENTIDADESv1\obj\Debug\SI-ASA-ENTIDADESv1.dll
+C:\Users\Nicolás\Desktop\ASA DE ALE ultima oportunidad\SI-ASAv6.3\SI-ASA-ENTIDADESv1\obj\Debug\SI-ASA-ENTIDADESv1.pdb

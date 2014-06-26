@@ -17,7 +17,7 @@ namespace SI_ASA_DAOv1
             string sql = "SELECT * FROM horarios";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -52,7 +52,7 @@ namespace SI_ASA_DAOv1
             string sql = "SELECT * FROM horarios h WHERE h.id_horario = @id";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -83,7 +83,7 @@ namespace SI_ASA_DAOv1
             string sql = "SELECT * FROM horarios WHERE horario_inicio = @desde, horario_fin = @hasta";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -115,7 +115,7 @@ namespace SI_ASA_DAOv1
             string sql = "INSERT INTO horarios (horario_inicio, horario_fin) VALUES (@horario_inicio, @horario_fin)";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -146,7 +146,7 @@ namespace SI_ASA_DAOv1
             string sql = "DELETE FROM horarios h WHERE h.horario_inicio=@horario_inicio AND h.horario_fin=@horario_fin)";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
 
             try
             {
@@ -176,7 +176,7 @@ namespace SI_ASA_DAOv1
             sql += "WHERE h.horario_inicio=@horario_inicio AND h.horario_fin=@horario_fin";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
 
             try
             {

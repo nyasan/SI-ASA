@@ -71,6 +71,17 @@ public partial class User_Control_busqueda : System.Web.UI.UserControl
         {
         }
     }
+    public int tipoDocId
+    {
+        
+        get
+        {
+            return ddl_tipoDoc.SelectedIndex;
+        }
+        set
+        {
+        }
+    }
     protected void btn_Buscar_Click(object sender, EventArgs e)
     {
         if (Seleccion != null) //existe un suscriptor

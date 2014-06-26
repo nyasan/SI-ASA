@@ -38,9 +38,10 @@
                             Value="Alumnos">
                             <asp:MenuItem NavigateUrl="~/ABMC/Alumno.aspx" Text="Nuevo " Value="Nuevo">
                             </asp:MenuItem>
-                            <asp:MenuItem NavigateUrl="~/ABMC/Alumno.aspx" Text="Eliminar" Value="Eliminar">
+                            <asp:MenuItem NavigateUrl="~/ABMC/grillaAlumnos.aspx" Text="Eliminar" 
+                                Value="Eliminar">
                             </asp:MenuItem>
-                            <asp:MenuItem NavigateUrl="~/ABMC/Alumno.aspx" Text="Modificar" 
+                            <asp:MenuItem NavigateUrl="~/ABMC/grillaAlumnos.aspx" Text="Modificar" 
                                 Value="Modificar"></asp:MenuItem>
                             <asp:MenuItem NavigateUrl="~/ABMC/grillaAlumnos.aspx" Text="Consultar" 
                                 Value="Consultar"></asp:MenuItem>

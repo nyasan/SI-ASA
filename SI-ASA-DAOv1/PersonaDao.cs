@@ -16,7 +16,7 @@ namespace SI_ASA_DAOv1
         {
             List<Persona> listPersonas = new List<Persona>();
 
-            string sql = @"SELECT        p.id, p.nombre, p.apellido, p.nro_documento, p.domiclio, p.telefono, p.id_tipo_documento, p.celular, p.mail, p.fecha_nacimiento, t.id_tipo_documento AS Expr1, t.descripcion
+            string sql = @"SELECT        p.id, p.nombre, p.apellido, p.nro_documento, p.domicilio, p.telefono, p.id_tipo_documento, p.celular, p.mail, p.fecha_nacimiento, t.id_tipo_documento AS Expr1, t.descripcion
                          FROM            personas AS p INNER JOIN
                          tipo_documento AS t ON p.id_tipo_documento = t.id_tipo_documento";
             
@@ -30,7 +30,7 @@ namespace SI_ASA_DAOv1
             }
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
             try
             {
@@ -88,7 +88,7 @@ namespace SI_ASA_DAOv1
             string sql = "SELECT * FROM personas p WHERE p.id = @idPersona";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
             try
             {
@@ -126,9 +126,9 @@ namespace SI_ASA_DAOv1
 
             String sql = @"INSERT INTO personas
                          (nombre, apellido, nro_documento, telefono, id_tipo_documento, celular, mail, fecha_nacimiento, domicilio)
-                         VALUES        (@nombre,@apellido,@nro_documento,@telefono,@id_tipo_documento,@celular,@mail,@fecha_nacimiento,@domicilio)";
+                         VALUES        (@nombre,@apellido,@nro_documento,@telefono,@id_tipo_documento,@celular,@mail,@fecha_nacimiento,@domicilio) SELECT CAST(scope_identity() AS int)";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -158,8 +158,8 @@ namespace SI_ASA_DAOv1
                 cmd.Parameters.AddWithValue("@celular", persona.celular.ToString());
                 cmd.Parameters.AddWithValue("@mail", persona.mail.ToString());
                 cmd.Parameters.AddWithValue("@fecha_nacimiento", (DateTime)persona.fechaNacimiento);
-
-                i = (int) cmd.ExecuteScalar();
+                resetearAutoIncrement(MaxID());
+                i = (Int32)cmd.ExecuteScalar();
                 cn.Close();
             }
             catch (SqlException ex)
@@ -172,15 +172,15 @@ namespace SI_ASA_DAOv1
             return i;
         }
 
-        public static int delete(Persona persona)
+        public static void delete(Persona persona)
         {
-            int i = -1;
+            
 
             string sql = @"DELETE FROM personas
-                           WHERE        (nro_documento = @nro_documento) AND (id_tipo_documento = @id_tipo_documento)";
+                           WHERE        (nro_documento = @nro_documento) AND (id_tipo_documento = @id_tipo_documento) ";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
 
             try
             {
@@ -201,7 +201,7 @@ namespace SI_ASA_DAOv1
                 cmd.Parameters.AddWithValue("@nro_documento", persona.numDoc);
                 cmd.Parameters.AddWithValue("@id_tipo_documento", idDoc);
 
-                i = (int)cmd.ExecuteScalar();
+                cmd.ExecuteScalar();
             }
             catch (SqlException ex)
             {
@@ -211,20 +211,20 @@ namespace SI_ASA_DAOv1
             {
                 cn.Close();
             }
-            return i;
+           
         }
 
         public static int update(Persona personaVieja, Persona personaNueva)
         {
             int i = -1;
             string sql = @"UPDATE       personas
-                         SET                nombre = @nombre_nuevo, apellido = @apellido_nuevo, nro_documento = @nro_documento_nuevo, telefono = @telefono_nuevo, id_tipo_documento = @id_tipo_documento_nuevo, celular = @celular, 
-                         mail = @mail, fecha_nacimiento = @fecha_nacimiento, domiclio = @domicilio_nuevo
-                         WHERE        (nombre = @nombre) AND (apellido = @apellido) AND (nro_documento = @nro_documento) AND (telefono = @telefono) AND (id_tipo_documento = @id_tipo_documento) AND (celular = @celular) AND 
-                         (mail = @mail) AND (fecha_nacimiento = @fecha_nacimiento) AND (domiclio = @domicilio)";
+                         SET                nombre = @nombre_nuevo, apellido = @apellido_nuevo, nro_documento = @nro_documento_nuevo, telefono = @telefono_nuevo, id_tipo_documento = @id_tipo_documento_nuevo, celular = @celular_nuevo, 
+                         mail = @mail_nuevo, fecha_nacimiento = @fecha_nacimiento_nuevo, domicilio = @domicilio_nuevo
+                            OUTPUT INSERTED.id
+                         WHERE         (nro_documento = @nro_documento)  AND (id_tipo_documento = @id_tipo_documento)  ";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
 
             try
             {
@@ -264,17 +264,12 @@ namespace SI_ASA_DAOv1
                 cmd.Parameters.AddWithValue("@mail_nuevo", personaNueva.mail.ToString());
                 cmd.Parameters.AddWithValue("@fecha_nacimiento_nuevo", (DateTime)personaNueva.fechaNacimiento);
 
-                cmd.Parameters.AddWithValue("@nombre", personaVieja.nombre.ToString());
-                cmd.Parameters.AddWithValue("@apellido", personaVieja.apellido.ToString());
-                cmd.Parameters.AddWithValue("@nro_documento", (int)personaVieja.numDoc);
-                cmd.Parameters.AddWithValue("@domicilio", personaVieja.domicilio.ToString());
-                cmd.Parameters.AddWithValue("@telefono", personaVieja.telefono.ToString());
+                
+                cmd.Parameters.AddWithValue("@nro_documento", (int)personaVieja.numDoc);               
                 cmd.Parameters.AddWithValue("@id_tipo_documento", idTDViejo);
-                cmd.Parameters.AddWithValue("@celular", personaVieja.celular.ToString());
-                cmd.Parameters.AddWithValue("@mail", personaVieja.mail.ToString());
-                cmd.Parameters.AddWithValue("@fecha_nacimiento", (DateTime)personaVieja.fechaNacimiento);
+                
 
-                i = (int)cmd.ExecuteScalar();
+                i = (Int32)cmd.ExecuteScalar();
             }
             catch (SqlException ex)
             {
@@ -290,12 +285,12 @@ namespace SI_ASA_DAOv1
         public static Persona obtenerPorDatos(int numDoc, String descripcionTipoDoc)
         {
             Persona persona = new Persona();
-            string sql = @"SELECT        id, nombre, apellido, nro_documento, domiclio, telefono, id_tipo_documento, celular, mail, fecha_nacimiento
+            string sql = @"SELECT        id, nombre, apellido, nro_documento, domicilio, telefono, id_tipo_documento, celular, mail, fecha_nacimiento
                          FROM            personas
                          WHERE        (nro_documento = @nro_documento) AND (id_tipo_documento = @id_tipo_documento)";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
             try
             {
@@ -316,8 +311,9 @@ namespace SI_ASA_DAOv1
                 }
 
                 cmd.Parameters.AddWithValue("@id_tipo_documento", idDoc);
-
+                
                 SqlDataReader dr = cmd.ExecuteReader();
+                dr.Read();
                 persona.nombre = dr["nombre"].ToString();
                 persona.apellido = dr["apellido"].ToString();
                 persona.numDoc = numDoc;
@@ -336,6 +332,59 @@ namespace SI_ASA_DAOv1
                 cn.Close();
             }
             return persona;
+        }
+        public static void resetearAutoIncrement(int ultimoVal)
+        {
+            string sql = "DBCC CHECKIDENT ('personas', RESEED, @val);";
+            SqlConnection cn = new SqlConnection();
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            try
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand(sql, cn);
+                cmd.Parameters.AddWithValue("@val", ultimoVal);
+                cmd.ExecuteNonQuery();
+
+            }
+
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Error al buscar los Personas");
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+
+        }
+        public static int MaxID()
+        {
+            int i = 0;
+
+            string sql = @"SELECT        MAX(id) AS Expr1
+                         FROM            personas";
+
+            SqlConnection cn = new SqlConnection();
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+
+            try
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand(sql, cn);
+                i = (int)cmd.ExecuteScalar();
+            }
+
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Error al buscar los Personas");
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+            return i ;
         }
     }
 }
