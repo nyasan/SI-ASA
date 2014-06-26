@@ -15,11 +15,7 @@ C:\Users\CESAR\Documents\Visual Studio 2010\WebSites\SI-ASAv6.1\SI-ASA-ENTIDADES
 C:\Users\CESAR\Documents\Visual Studio 2010\WebSites\SI-ASAv6.1\SI-ASA-ENTIDADESv1\bin\Debug\SI-ASA-ENTIDADESv1.pdb
 C:\Users\CESAR\Documents\Visual Studio 2010\WebSites\SI-ASAv6.1\SI-ASA-ENTIDADESv1\obj\Debug\SI-ASA-ENTIDADESv1.dll
 C:\Users\CESAR\Documents\Visual Studio 2010\WebSites\SI-ASAv6.1\SI-ASA-ENTIDADESv1\obj\Debug\SI-ASA-ENTIDADESv1.pdb
-C:\Users\alejandraBeltramen\Documents\GitHub\SI-ASA\SI-ASA-ENTIDADESv1\bin\Debug\SI-ASA-ENTIDADESv1.dll
-C:\Users\alejandraBeltramen\Documents\GitHub\SI-ASA\SI-ASA-ENTIDADESv1\bin\Debug\SI-ASA-ENTIDADESv1.pdb
-C:\Users\alejandraBeltramen\Documents\GitHub\SI-ASA\SI-ASA-ENTIDADESv1\obj\Debug\SI-ASA-ENTIDADESv1.dll
-C:\Users\alejandraBeltramen\Documents\GitHub\SI-ASA\SI-ASA-ENTIDADESv1\obj\Debug\SI-ASA-ENTIDADESv1.pdb
-C:\Users\Nicolás\Desktop\ASA DE ALE ultima oportunidad\SI-ASAv6.3\SI-ASA-ENTIDADESv1\bin\Debug\SI-ASA-ENTIDADESv1.dll
-C:\Users\Nicolás\Desktop\ASA DE ALE ultima oportunidad\SI-ASAv6.3\SI-ASA-ENTIDADESv1\bin\Debug\SI-ASA-ENTIDADESv1.pdb
-C:\Users\Nicolás\Desktop\ASA DE ALE ultima oportunidad\SI-ASAv6.3\SI-ASA-ENTIDADESv1\obj\Debug\SI-ASA-ENTIDADESv1.dll
-C:\Users\Nicolás\Desktop\ASA DE ALE ultima oportunidad\SI-ASAv6.3\SI-ASA-ENTIDADESv1\obj\Debug\SI-ASA-ENTIDADESv1.pdb
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\SI-ASAv6.3\SI-ASA-ENTIDADESv1\bin\Debug\SI-ASA-ENTIDADESv1.dll
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\SI-ASAv6.3\SI-ASA-ENTIDADESv1\bin\Debug\SI-ASA-ENTIDADESv1.pdb
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\SI-ASAv6.3\SI-ASA-ENTIDADESv1\obj\Debug\SI-ASA-ENTIDADESv1.dll
+D:\aale\UTN\4-CUARTO AÑO\PAVII\ASA\SI-ASAv6.3\SI-ASA-ENTIDADESv1\obj\Debug\SI-ASA-ENTIDADESv1.pdb

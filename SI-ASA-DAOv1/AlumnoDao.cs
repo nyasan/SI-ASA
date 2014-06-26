@@ -18,7 +18,7 @@ namespace SI_ASA_DAOv1
             string sql = "SELECT * FROM alumnos a JOIN personas pA ON (a.id_persona = pA.id) ";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -71,7 +71,7 @@ namespace SI_ASA_DAOv1
                 sql += " AND (a.legajo = @legajo)";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -127,7 +127,7 @@ namespace SI_ASA_DAOv1
                          WHERE                    (a.id_persona = @idPersona)";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -168,7 +168,7 @@ namespace SI_ASA_DAOv1
                          WHERE        (a.legajo = @legajo)";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -224,7 +224,7 @@ namespace SI_ASA_DAOv1
                          (id_persona, id_madre, id_padre, conoce_musica, id_nivel_estudio)
                          VALUES        (@id_persona,@id_madre,@id_padre,@conoce_musica,@id_nivel_estudio) SELECT CAST(scope_identity() AS int)";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -285,7 +285,7 @@ namespace SI_ASA_DAOv1
                          WHERE        (legajo = @legajo) SELECT CAST(scope_identity() AS int)";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
 
             try
             {
@@ -320,7 +320,7 @@ namespace SI_ASA_DAOv1
                          WHERE        (legajo = @legajoAlumno)";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
 
             try
             {
@@ -384,7 +384,7 @@ namespace SI_ASA_DAOv1
                          WHERE        (legajo = @legajo)";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -431,7 +431,7 @@ namespace SI_ASA_DAOv1
             if (numero != 0 && tipo_documento != 0)
                 sql += " AND (pA.nro_documento = @numero) AND (pA.id_tipo_documento = @tipo_documento)";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
 
             try
             {
@@ -489,7 +489,7 @@ namespace SI_ASA_DAOv1
                          FROM            alumnos";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
 
             try
             {
@@ -513,7 +513,7 @@ namespace SI_ASA_DAOv1
         {
             string sql = "DBCC CHECKIDENT ('alumnos', RESEED, @val);";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             try
             {
                 cn.Open();

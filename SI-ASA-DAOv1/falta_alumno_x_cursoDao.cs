@@ -17,7 +17,7 @@ namespace SI_ASA_DAOv1
                          (legajo_alumno, id_curso, fecha_falta)
                          VALUES        (@legajo_alumno,@id_curso,@fecha_falta)";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             cn.Open();
             SqlTransaction sqltran = cn.BeginTransaction();
 
@@ -31,14 +31,13 @@ namespace SI_ASA_DAOv1
                 foreach (String l in listAlumnos)
                 {
                     sql = @"INSERT INTO falta_alumno_x_curso
-                         (legajo_alumno, id_curso, fecha_falta)
-                         VALUES        (@legajo_alumno"+l+",@id_curso"+l+",@fecha_falta"+l+")";
+                          (legajo_alumno, id_curso, fecha_falta)
+                         VALUES        (@legajo_alumno" + l + ",@id_curso" + l + ",@fecha_falta" + l + ")";
                     cmd.CommandText = sql;
-                    cmd.Parameters.AddWithValue("@legajo_alumno"+l, l);
-                    cmd.Parameters.AddWithValue("@id_curso"+l, idCurso);
-                    cmd.Parameters.AddWithValue("@fecha_falta"+l, fechaAsistencia);
+                    cmd.Parameters.AddWithValue("@legajo_alumno" + l, l);
+                    cmd.Parameters.AddWithValue("@id_curso" + l, idCurso);
+                    cmd.Parameters.AddWithValue("@fecha_falta" + l, fechaAsistencia);
                     cmd.ExecuteNonQuery();
-                    i++;
                 }
 
                 sqltran.Commit();

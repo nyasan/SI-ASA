@@ -30,7 +30,7 @@ namespace SI_ASA_DAOv1
             }
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
             try
             {
@@ -88,7 +88,7 @@ namespace SI_ASA_DAOv1
             string sql = "SELECT * FROM personas p WHERE p.id = @idPersona";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
             try
             {
@@ -101,7 +101,7 @@ namespace SI_ASA_DAOv1
                         persona.apellido = dr["apellido"].ToString();
                         persona.numDoc = int.Parse(dr["nro_documento"].ToString());
                         persona.tipoDoc = TipoDocumentoDao.obtenerTipoDocumentoPorId(int.Parse(dr["id_tipo_documento"].ToString()));
-                        persona.domicilio = dr["domiclio"].ToString();
+                        persona.domicilio = dr["domicilio"].ToString();
                         persona.telefono = dr["telefono"].ToString();
                         persona.celular = dr["celular"].ToString();
                         persona.mail = dr["mail"].ToString();
@@ -129,7 +129,7 @@ namespace SI_ASA_DAOv1
                          (nombre, apellido, nro_documento, telefono, id_tipo_documento, celular, mail, fecha_nacimiento, domicilio)
                          VALUES        (@nombre,@apellido,@nro_documento,@telefono,@id_tipo_documento,@celular,@mail,@fecha_nacimiento,@domicilio) SELECT CAST(scope_identity() AS int)";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
 
             try
@@ -181,7 +181,7 @@ namespace SI_ASA_DAOv1
                            WHERE        (nro_documento = @nro_documento) AND (id_tipo_documento = @id_tipo_documento) ";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
 
             try
             {
@@ -225,7 +225,7 @@ namespace SI_ASA_DAOv1
                          WHERE         (nro_documento = @nro_documento)  AND (id_tipo_documento = @id_tipo_documento)  ";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
 
             try
             {
@@ -291,7 +291,7 @@ namespace SI_ASA_DAOv1
                          WHERE        (nro_documento = @nro_documento) AND (id_tipo_documento = @id_tipo_documento)";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             //PONER LA STRINGCONNECTION CORRECTA!!!
             try
             {
@@ -338,7 +338,7 @@ namespace SI_ASA_DAOv1
         {
             string sql = "DBCC CHECKIDENT ('personas', RESEED, @val);";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             try
             {
                 cn.Open();
@@ -367,7 +367,7 @@ namespace SI_ASA_DAOv1
                          FROM            personas";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
 
             try
             {

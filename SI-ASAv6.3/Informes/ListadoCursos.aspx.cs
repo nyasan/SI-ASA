@@ -14,7 +14,7 @@ public partial class Informes_ListadoCursos : System.Web.UI.Page
     }
     protected void bt_filtrar_Click(object sender, EventArgs e)
     {
-        string nombre = null;
+        //string nombre = null;
 
         DateTime? horaDesde = null;
         DateTime? horaHasta = null;

@@ -22,7 +22,7 @@ namespace SI_ASA_DAOv1
             //string sqlHorario = "insert into horario values (@horario_desde, @horario_hasta)";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             try
             {
                 cn.Open();
@@ -63,7 +63,7 @@ namespace SI_ASA_DAOv1
                          horarios ON cursos.id_horario = horarios.id_horario
                          WHERE        (cursos.nombre LIKE @nombre)";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             try
             {
                 cn.Open();
@@ -106,7 +106,7 @@ namespace SI_ASA_DAOv1
                          FROM            cursos INNER JOIN
                          horarios ON cursos.id_horario = horarios.id_horario";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=CESAR-PC\\SQLSERVER;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             try
             {
                 cn.Open();
@@ -120,17 +120,13 @@ namespace SI_ASA_DAOv1
                         nombre = dr["nombre"].ToString(),
                         descripcion = dr["descripcion"].ToString(),
                         horario = HorarioDao.obtener((int)dr["id_horario"]),
-                        //hora_desde = dr["horario_inicio"].ToString(),
-                        //hora_hasta = dr["horario_fin"].ToString()
                     };
-                    listCursos.Add(curso); //lleno la coleccion en memoria
+                    listCursos.Add(curso);
                 }
                 dr.Close();
             }
             catch (SqlException ex)
             {
-                if (cn.State == ConnectionState.Open)
-                    cn.Close();
                 ex.StackTrace.ToString();
                 throw new ApplicationException("Error al buscar los cursos");
             }
@@ -150,7 +146,7 @@ namespace SI_ASA_DAOv1
                               WHERE        (nombre LIKE @nombre_viejo) AND (descripcion LIKE @descripcion_vieja) AND (id_horario = @id_horario_viejo)";
             //string sqlHorario = "update horario set hora_desde=@hora_desde, hora_hasta=@hora_hasta where hora_desde=@hora_desde_vieja and hora_hasta=hora_hasta_vieja";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             try
             {
                 cn.Open();
@@ -189,7 +185,7 @@ namespace SI_ASA_DAOv1
             string sqlCurso = @"DELETE FROM cursos
                               WHERE                         (nombre LIKE @nombre) AND (descripcion LIKE @descripcion)";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             try
             {
                 cn.Open();
@@ -220,7 +216,7 @@ namespace SI_ASA_DAOv1
                                                 horarios ON cursos.id_horario = horarios.id_horario
                          WHERE        (cursos.nombre LIKE @nombre)";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             try
             {
                 cn.Open();
@@ -257,7 +253,7 @@ namespace SI_ASA_DAOv1
                          FROM            cursos";
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
 
             try
             {

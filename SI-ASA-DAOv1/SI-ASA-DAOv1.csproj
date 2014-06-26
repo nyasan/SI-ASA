@@ -45,15 +45,17 @@
     <Compile Include="AlumnosxCursoDao.cs" />
     <Compile Include="CursoDao.cs" />
     <Compile Include="CursosQueryDao.cs" />
+    <Compile Include="Dao.cs" />
     <Compile Include="DocenteDao.cs" />
     <Compile Include="DocenteQueryDao.cs" />
-    <Compile Include="docente_x_cursoDao.cs" />
+    <Compile Include="Docente_x_cursoDao.cs" />
     <Compile Include="falta_alumno_x_cursoDao.cs" />
     <Compile Include="HorarioDao.cs" />
     <Compile Include="NivelEstudioDao.cs" />
     <Compile Include="PersonaDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TipoDocumentoDao.cs" />
+    <Compile Include="UsuarioDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SI-ASA-ENTIDADESv1\SI-ASA-ENTIDADESv1.csproj">

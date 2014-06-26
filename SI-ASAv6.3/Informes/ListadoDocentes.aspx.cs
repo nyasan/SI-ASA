@@ -11,6 +11,14 @@ public partial class Informes_ListadoDocentes : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!IsPostBack)
+        {
+            lb_cursos.DataSource = CursoDao.ObtenerTodo();
+            lb_cursos.DataValueField = "id_curso";
+            lb_cursos.DataTextField = "nombre";
+            lb_cursos.DataBind();
+            lb_cursos.Items.Insert(0, new ListItem("Todos", "0"));
+        }
 
     }
 
@@ -31,7 +39,8 @@ public partial class Informes_ListadoDocentes : System.Web.UI.Page
             legDesde = int.Parse(txt_legDesde.Text);
         if (txt_legHasta.Text != string.Empty)
             legHasta = int.Parse(txt_legHasta.Text);
-        if (lb_cursos.SelectedIndex == -1)
+        //if (lb_cursos.SelectedIndex == -1)
+        if (lb_cursos.SelectedIndex != -1 && lb_cursos.SelectedIndex != 0)
         {
             cursos = new List<string>();
             foreach (ListItem i in lb_cursos.Items)

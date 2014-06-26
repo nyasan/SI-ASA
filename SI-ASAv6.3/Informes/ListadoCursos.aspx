@@ -17,7 +17,12 @@
     <asp:Button ID="bt_filtrar" runat="server" Text="Filtrar" 
         onclick="bt_filtrar_Click" />
 </fieldset>
-    <asp:GridView ID="grillaCursos" runat="server">
+    <asp:GridView ID="grillaCursos" runat="server" AutoGenerateColumns="False">
+        <Columns>
+            <asp:BoundField DataField="nombre" HeaderText="Nombre" />
+            <asp:BoundField DataField="horario.desde" HeaderText="Horario Inicio" />
+            <asp:BoundField DataField="horario.hasta" HeaderText="Horario Fin" />
+        </Columns>
     </asp:GridView>
 </asp:Content>
 

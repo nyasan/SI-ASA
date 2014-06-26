@@ -19,7 +19,7 @@ namespace SI_ASA_DAOv1
             SqlCommand cmd = new SqlCommand();           
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             try
             {
                 cn.Open();
@@ -67,7 +67,7 @@ namespace SI_ASA_DAOv1
             SqlCommand cmd = new SqlCommand();
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             try
             {
                 cn.Open();
@@ -97,7 +97,7 @@ namespace SI_ASA_DAOv1
             TipoDocumento tipoDoc = new TipoDocumento();
             SqlConnection cn = new SqlConnection();
             string sql = "SELECT * FROM tipo_documento t WHERE t.id_tipo_documento = @idTipoDocu";
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             try
             {
                 cn.Open();
@@ -128,7 +128,7 @@ namespace SI_ASA_DAOv1
             int id = -1;
             string sql = "INSERT INTO tipo_documento (descripcion) VALUES (@descripcion)";
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
 
             try
             {
@@ -152,7 +152,7 @@ namespace SI_ASA_DAOv1
         public static Object cargarCombo ()
         {
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             SqlCommand sql = new SqlCommand("SELECT * FROM tipo_documento", cn);
             SqlDataAdapter da = new SqlDataAdapter(sql.CommandText, cn);
             DataSet ds = new DataSet();

@@ -41,7 +41,10 @@
                     </p>
                 </fieldset>
                 <p class="submitButton">
-                    <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Iniciar sesión" ValidationGroup="LoginUserValidationGroup"/>
+                    <asp:Button ID="LoginButton" runat="server" CommandName="Login" 
+                        Text="Iniciar sesión" ValidationGroup="LoginUserValidationGroup"/>
+                    <asp:Button ID="btn_usuarioAnonimo" runat="server" CommandName="Login" 
+                        Text="Soy usuario anónimo" ValidationGroup="LoginUserValidationGroup" />
                 </p>
             </div>
         </LayoutTemplate>

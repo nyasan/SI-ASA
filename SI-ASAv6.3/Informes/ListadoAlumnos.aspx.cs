@@ -35,6 +35,7 @@ public partial class Informes_ListadoAlumnos : System.Web.UI.Page
             ausDesde = DateTime.Parse(txt_ausDesde.Text);
         if (txt_ausHasta.Text != string.Empty)
             ausHasta = DateTime.Parse(txt_ausHasta.Text);
+        
         if (lb_cursos.SelectedIndex != -1 && lb_cursos.SelectedIndex != 0)
         {
             cursos = new List<string>();
@@ -42,8 +43,9 @@ public partial class Informes_ListadoAlumnos : System.Web.UI.Page
             {
                 if(i.Selected) cursos.Add(i.Text);
             }
+            
         }
-        grillaAlumnos.DataSource = AlumnosQueryDao.Informe(inscDesde, inscHasta, ausDesde, ausHasta, cursos );
+        grillaAlumnos.DataSource = AlumnosQueryDao.Informe(inscDesde, inscHasta, ausDesde, ausHasta, cursos);
         grillaAlumnos.DataBind();
     }
 }

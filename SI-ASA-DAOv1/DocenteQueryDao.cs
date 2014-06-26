@@ -30,15 +30,17 @@ namespace SI_ASA_DAOv1
                 sql += " AND docentes.legajo <= @legHasta";
             if (cursos != null)
             {
+                sql += " AND ( 1 > 2 ";
                 foreach (string i in cursos)
                 {
-                    sql += " AND cursos.nombre LIKE @nombreCurso";
+                    sql += " OR cursos.nombre LIKE @nombreCurso"+i;
                 }
+                sql += " )";
             }
 
 
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=TVD-PC;Initial Catalog=ASA;Integrated Security=True";
+            cn.ConnectionString = "Data Source=ALEBELTRAMEN\\ALEJANDRA;Initial Catalog=ASA;Integrated Security=True";
             try
             {
                 cn.Open();
@@ -55,7 +57,7 @@ namespace SI_ASA_DAOv1
                 {
                     foreach (string i in cursos)
                     {
-                        cmd.Parameters.AddWithValue("@nombreCurso", i);
+                        cmd.Parameters.AddWithValue("@nombreCurso"+i, i);
                     }
                 }
 

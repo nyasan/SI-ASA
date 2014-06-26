@@ -12,10 +12,13 @@ public partial class grillaDocentes : System.Web.UI.Page
     List<Docente> listDocente = new List<Docente>();
     protected void Page_Load(object sender, EventArgs e)
     {
-        cargarCombo(ddl_tipoDoc);
-        listDocente = DocenteDao.obtenerTodo();
-        grillaDocente.DataSource = listDocente;
-        grillaDocente.DataBind();
+        if (!IsPostBack)
+        {
+            cargarCombo(ddl_tipoDoc);
+            listDocente = DocenteDao.obtenerTodo();
+            grillaDocente.DataSource = listDocente;
+            grillaDocente.DataBind();
+        }
     }
 
     protected void cargarCombo(DropDownList ddl)
@@ -43,7 +46,7 @@ public partial class grillaDocentes : System.Web.UI.Page
             numDoc = int.Parse(txt_numeroDoc.Text);
         if (txt_legajo.Text != "")
             legajo = int.Parse(txt_legajo.Text);
-        grillaDocente.DataSource = DocenteDao.buscarPorParametros(txt_nombre.Text, txt_apellido.Text, legajo, numDoc, ddl_tipoDoc.SelectedIndex);
+        grillaDocente.DataSource = DocenteDao.buscarPorParametros(txt_nombre.Text, txt_apellido.Text, legajo, ddl_tipoDoc.SelectedIndex, numDoc);
         grillaDocente.DataKeyNames = new string[] { "legajo" };
         grillaDocente.DataBind();
 
