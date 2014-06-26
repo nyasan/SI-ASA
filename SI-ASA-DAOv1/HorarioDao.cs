@@ -80,7 +80,7 @@ namespace SI_ASA_DAOv1
         public static int obtenerID(string desde, string hasta)
         {
             int id = -1;
-            string sql = "SELECT * FROM horarios WHERE horario_inicio = @desde, horario_fin = @hasta";
+            string sql = "SELECT * FROM horarios WHERE horario_inicio = @desde AND horario_fin = @hasta";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
@@ -91,20 +91,27 @@ namespace SI_ASA_DAOv1
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
                 cmd.Parameters.AddWithValue("@desde", desde);
-                cmd.Parameters.AddWithValue("@hasta", hasta);
-                SqlDataReader dr = cmd.ExecuteReader();
+                cmd.Parameters.AddWithValue("@hasta", hasta);                
 
-                id = (int) dr["id_horario"];
+                int scalar = (Int32)cmd.ExecuteScalar();
+                if (scalar > 0)
+                {
+                    id = (int)scalar;
+                }
 
-                dr.Close();
                 cn.Close();
             }
             catch (SqlException ex)
             {
                 if (cn.State == ConnectionState.Open)
                     cn.Close();
-                throw new ApplicationException("Error al buscar el Horario");
+                throw new ApplicationException("Error al buscar el Horario" + ex.Message);
             }
+            catch (NullReferenceException exNRE)
+            {
+                cn.Close();
+            }
+
             return id;
         }
 
@@ -112,28 +119,34 @@ namespace SI_ASA_DAOv1
         public static int add(Horario horario)
         {
             int i = -1;
-            string sql = "INSERT INTO horarios (horario_inicio, horario_fin) VALUES (@horario_inicio, @horario_fin)";
+            int busqueda =obtenerID(horario.desde, horario.hasta);
 
-            SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
-            //PONER LA STRINGCONNECTION CORRECTA!!!
+            if (busqueda == -1)
+            {
+                string sql = "INSERT INTO horarios (horario_inicio, horario_fin) VALUES (@horario_inicio, @horario_fin) SELECT CAST(scope_identity() AS int)";
+                SqlConnection cn = new SqlConnection();
+                cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+                //PONER LA STRINGCONNECTION CORRECTA!!!
 
-            try
-            {
-                cn.Open();
-                SqlCommand cmd = new SqlCommand(sql, cn);
-                cmd.Parameters.AddWithValue("@horario_inicio", horario.desde);
-                cmd.Parameters.AddWithValue("@horario_fin", horario.hasta);
-                i = (int) cmd.ExecuteNonQuery();
+                try
+                {
+                    cn.Open();
+                    SqlCommand cmd = new SqlCommand(sql, cn);
+                    cmd.Parameters.AddWithValue("@horario_inicio", horario.desde);
+                    cmd.Parameters.AddWithValue("@horario_fin", horario.hasta);
+                    resetearAutoIncrement(maxID() - 1); // aca le pone el autoincrement en el ultimo legajo de la tabla, pido el max legajo, -1 es el ultimo de la tabla
+                    i = (Int32)cmd.ExecuteScalar();
+                }
+                catch (SqlException ex)
+                {
+                    throw new ApplicationException("Error al insertar el Horario");
+                }
+                finally
+                {
+                    cn.Close();
+                }
             }
-            catch (SqlException ex)
-            {
-                throw new ApplicationException("Error al insertar el Horario");
-            }
-            finally
-            {
-                cn.Close();
-            }
+            else i = busqueda;
             return i;
         }
 
@@ -169,11 +182,54 @@ namespace SI_ASA_DAOv1
             return i;
         }
 
-        public static int update(Horario horarioViejo, Horario horarioNuevo)
+        public static int update( Horario horarioNuevo)
         {
-            int i = -1;
-            string sql = "UPDATE horarios h SET h.horario_inicio=@horario_inicioNuevo, h.horario_fin=@horario_finNuevo ";
-            sql += "WHERE h.horario_inicio=@horario_inicio AND h.horario_fin=@horario_fin";
+            int idBusqueda = obtenerID(horarioNuevo.desde,horarioNuevo.hasta);
+            if (idBusqueda != 1)
+            {
+                return idBusqueda;
+            }
+            else
+            {
+                return add(horarioNuevo);
+            }
+
+            //int i = -1;
+            //string sql = "UPDATE horarios h SET h.horario_inicio=@horario_inicioNuevo, h.horario_fin=@horario_finNuevo ";
+            //sql += "WHERE h.horario_inicio=@horario_inicio AND h.horario_fin=@horario_fin";
+
+            //SqlConnection cn = new SqlConnection();
+            //cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+
+            //try
+            //{
+            //    cn.Open();
+            //    SqlCommand cmd = new SqlCommand(sql, cn);
+
+            //    cmd.Parameters.AddWithValue("@horario_inicio", horarioViejo.desde);
+            //    cmd.Parameters.AddWithValue("@horario_fin", horarioViejo.hasta);
+            //    cmd.Parameters.AddWithValue("@horario_inicioNuevo", horarioNuevo.desde);
+            //    cmd.Parameters.AddWithValue("@horario_finNuevo", horarioNuevo.hasta);
+
+            //    i = (int)cmd.ExecuteScalar();
+            //}
+            //catch (SqlException ex)
+            //{
+            //    throw new ApplicationException("Error al actualizar el Horario");
+            //}
+            //finally
+            //{
+            //    cn.Close();
+            //}
+            
+            //return i;
+        }
+        public static int maxID()
+        {
+            int i = 0;
+
+            string sql = @"SELECT        MAX(id_horario) AS Expr1
+                         FROM            horarios";
 
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
@@ -182,24 +238,44 @@ namespace SI_ASA_DAOv1
             {
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(sql, cn);
-
-                cmd.Parameters.AddWithValue("@horario_inicio", horarioViejo.desde);
-                cmd.Parameters.AddWithValue("@horario_fin", horarioViejo.hasta);
-                cmd.Parameters.AddWithValue("@horario_inicioNuevo", horarioNuevo.desde);
-                cmd.Parameters.AddWithValue("@horario_finNuevo", horarioNuevo.hasta);
-
                 i = (int)cmd.ExecuteScalar();
             }
+
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error al actualizar el Horario");
+                throw new ApplicationException("Error al buscar los horarios" + ex.Message);
             }
             finally
             {
                 cn.Close();
             }
-            
-            return i;
+
+            return i + 1;
+        }
+        public static void resetearAutoIncrement(int ultimoVal)
+        {
+            string sql = "DBCC CHECKIDENT ('horarios', RESEED, @val);";
+            SqlConnection cn = new SqlConnection();
+            cn.ConnectionString = "Data Source=NICO;Initial Catalog=ASA;Integrated Security=True";
+            try
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand(sql, cn);
+                cmd.Parameters.AddWithValue("@val", ultimoVal);
+                cmd.ExecuteNonQuery();
+
+            }
+
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Error al resetear autoincrmental en el ultimo valor" + ex.Message);
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+
         }
     }
 }

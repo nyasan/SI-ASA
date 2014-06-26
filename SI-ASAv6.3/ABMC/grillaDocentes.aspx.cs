@@ -31,7 +31,7 @@ public partial class grillaDocentes : System.Web.UI.Page
     protected void grillaDocente_SelectedIndexChanged(object sender, EventArgs e)
     {
         Docente docente = DocenteDao.obtenerPorLegajo(int.Parse(grillaDocente.SelectedRow.Cells[1].Text));
-        Session["legajo"] = docente.legajo;
+        Session["docente"] = docente;
         Session["origen"] = "consulta";
         Response.Redirect("Docente.aspx");
     }

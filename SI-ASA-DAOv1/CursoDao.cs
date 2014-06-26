@@ -164,7 +164,7 @@ namespace SI_ASA_DAOv1
                 //cmd = null;
 
                 SqlCommand cmd = new SqlCommand(sqlCurso, cn);
-                cmd.Parameters.AddWithValue("id_horario", HorarioDao.update(horarioViejo, horarioNuevo));
+                cmd.Parameters.AddWithValue("id_horario", HorarioDao.update( horarioNuevo));
                 cmd.Parameters.AddWithValue("id_horario_viejo", HorarioDao.obtenerID(horarioViejo.desde, horarioViejo.hasta));
                 cmd.Parameters.AddWithValue("nombre", cursoNuevo.nombre);
                 cmd.Parameters.AddWithValue("descripcion", cursoNuevo.descripcion);

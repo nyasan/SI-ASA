@@ -43,7 +43,7 @@ namespace SI_ASA_DAOv1
             }
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error al buscar los Alumnos");
+                throw new ApplicationException("Error al buscar los Alumnos" + ex.Message);
             }
             finally
             {
@@ -107,7 +107,7 @@ namespace SI_ASA_DAOv1
             }
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error al buscar los Alumnos");
+                throw new ApplicationException("Error al buscar los Alumnos" + ex.Message);
             }
             finally
             {
@@ -148,7 +148,7 @@ namespace SI_ASA_DAOv1
             }
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error al buscar al Alumno");
+                throw new ApplicationException("Error al buscar al Alumno" + ex.Message);
             }
             finally
             {
@@ -206,7 +206,7 @@ namespace SI_ASA_DAOv1
             }
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error al buscar al Alumno");
+                throw new ApplicationException("Error al buscar al Alumno" + ex.Message);
             }
             finally
             {
@@ -269,7 +269,7 @@ namespace SI_ASA_DAOv1
             }
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error al insertar el Alumno");
+                throw new ApplicationException("Error al insertar el Alumno" + ex.Message);
             }
             finally
             {
@@ -302,7 +302,7 @@ namespace SI_ASA_DAOv1
             }
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error al eliminar el Alumno");
+                throw new ApplicationException("Error al eliminar el Alumno"+ex.Message);
             }
             finally
             {
@@ -366,7 +366,7 @@ namespace SI_ASA_DAOv1
             }
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error al actualizar los datos del Alumno");
+                throw new ApplicationException("Error al actualizar los datos del Alumno"+ex.Message);
             }
             finally
             {
@@ -403,7 +403,7 @@ namespace SI_ASA_DAOv1
             }
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error al buscar en los Alumnos existentes");
+                throw new ApplicationException("Error al buscar en los Alumnos existentes"+ex.Message);
             }
             finally
             {
@@ -500,7 +500,7 @@ namespace SI_ASA_DAOv1
 
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error al buscar los Alumnos");
+                throw new ApplicationException("Error en el MaxLegajo" + ex.Message);
             }
             finally
             {
@@ -525,7 +525,7 @@ namespace SI_ASA_DAOv1
 
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error al buscar los Alumnos");
+                throw new ApplicationException("Error al resetear autoincrmental en el ultimo valor"+ex.Message);
             }
             finally
             {

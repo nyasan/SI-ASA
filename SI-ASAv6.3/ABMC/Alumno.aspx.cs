@@ -32,6 +32,10 @@ public partial class ABMC_Alumno : System.Web.UI.Page
             cargarCombo(ddl_TipoDocMadre, 1);
             cargarCombo(ddl_TipoDocPadre, 1);
             cargarCombo(ddl_NivelEstudio, 0);
+            if (Session["origen"] == null)
+            {
+                Session["origen"] = "default";
+            }
             string origen = Session["origen"].ToString();
             if (origen.Equals("consulta"))
             {
